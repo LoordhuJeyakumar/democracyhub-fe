@@ -9,7 +9,7 @@ function RegisterPage() {
       <Wrapper>
         <div className="container h-100">
           <div>
-            <h1 className="text-center p-2 mt-2">Register</h1>
+            <h1 className="text-center mt-3 p-2 fw-bold">Register</h1>
             <div className="row">
               <div className="col-6">
                 <img src={illustration} alt="" />
@@ -103,7 +103,7 @@ function RegisterPage() {
                       Register
                     </button>
                     <button type="reset" className="btn btn-second w-25">
-                      Reset
+                      Clear
                     </button>
                   </div>
                   <div>

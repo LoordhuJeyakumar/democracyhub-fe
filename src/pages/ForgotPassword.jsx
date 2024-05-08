@@ -1,18 +1,15 @@
 import React from "react";
 import Wrapper from "../components/Wrapper";
-import loginSvg from "../assets/login.svg";
 import { Link } from "react-router-dom";
+import forgotpassword from "../assets/forgotpassword.svg";
 
-function LoginPage() {
+function ForgotPassword() {
   return (
     <Wrapper>
       <div className="container">
-        <h1 className="text-center mt-3 p-2 fw-bold">Login</h1>
-        <div className="row">
-          <div className="col-6">
-            <img src={loginSvg} alt="" />
-          </div>
-          <div className="col-6 mt-5 pt-3">
+        <h1 className="text-center mt-3 p-2 fw-bold m-0">Forgot Password</h1>
+        <div className="row p-4 m-0">
+          <div className="col-md-6  forgot-password">
             <form className="needs-validation" noValidate>
               <div className="input-box email mb-3">
                 <label htmlFor="emailInput" className="form-label">
@@ -28,32 +25,17 @@ function LoginPage() {
                   required
                 />
                 <div className="valid-feedback">Looks good!</div>
-                <div className="invalid-feedback">Please enter your email.</div>
-                <div className="form-text">Please enter your email</div>
-              </div>
-              <div className="input-box password mb-3">
-                <label htmlFor="password" className="form-label">
-                  <i className="fa fa-key" aria-hidden="true"></i> Password
-                </label>
-
-                <input
-                  name="password"
-                  type="password"
-                  id="password"
-                  className="form-control"
-                  aria-describedby="passwordHelpBlock"
-                  required
-                />
-                <div className="valid-feedback">Looks good!</div>
-                <div className="invalid-feedback">Please enter password.</div>
-                <div id="passwordHelpBlock" className="form-text">
-                  Please enter your password
+                <div className="invalid-feedback">
+                  Please enter your email!.
+                </div>
+                <div className="form-text">
+                  Please enter your email to get password reset link.
                 </div>
               </div>
 
               <div className="d-flex justify-content-evenly">
                 <button className="btn btn-main w-25" type="submit">
-                  Login
+                  Send Link
                 </button>
                 <button type="reset" className="btn btn-second w-25">
                   Clear
@@ -65,11 +47,14 @@ function LoginPage() {
                   <Link to={"/register"}>Register here</Link>
                 </p>
                 <p className="text-center mt-3 opacity-75">
-                  <small>If you forgot your password? </small>
-                  <Link to={"/forget-password"}>Click here</Link>
+                  <small>If you remember your password? </small>
+                  <Link to={"/login"}>Login here</Link>
                 </p>
               </div>
             </form>
+          </div>
+          <div className="col-md-6">
+            <img src={forgotpassword} alt="forgot password" />
           </div>
         </div>
       </div>
@@ -77,4 +62,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default ForgotPassword;

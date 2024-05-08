@@ -25,9 +25,9 @@ function Navbar() {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-            <button type="button" className="btn btn-main mx-2">
+            <Link to="/login" className="btn btn-main mx-2">
               Login
-            </button>
+            </Link>
           </div>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
