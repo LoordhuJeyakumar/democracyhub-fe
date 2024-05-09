@@ -1,16 +1,71 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Wrapper from "../components/Wrapper";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import forgotpassword from "../assets/forgotpassword.svg";
+import userService from "../services/userService";
+import { toast } from "react-toastify";
 
 function ForgotPassword() {
+  const [email, setEmail] = useState("");
+  const forgotpasswordREf = useRef(null);
+  const [isSubmit, setIsSubmit] = useState(false);
+  const navigate = useNavigate();
+
+  const handleForgotPasswordLink = async (event) => {
+    setIsSubmit(true);
+    event.preventDefault();
+
+    if (!forgotpasswordREf.current.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      setIsSubmit(false);
+    }
+
+    forgotpasswordREf.current.classList.add("was-validated");
+    if (forgotpasswordREf.current.checkValidity()) {
+      const res = await userService.sendVerificationLink(email);
+      console.log(res);
+      if (res?.response?.status === 401) {
+        toast.info(res?.response?.data?.message);
+        setIsSubmit(false);
+        setEmail("");
+        forgotpasswordREf.current.classList.remove("was-validated");
+      }
+      if (res?.response?.status === 403) {
+        toast.info(res?.response?.data?.message);
+        setIsSubmit(false);
+        setEmail("");
+        forgotpasswordREf.current.classList.remove("was-validated");
+      }
+      if (res?.message === "Network Error") {
+        toast.error(res.message);
+        setIsSubmit(false);
+        setEmail("");
+        forgotpasswordREf.current.classList.remove("was-validated");
+      }
+      if (res?.status === 200) {
+        toast.success(res?.data?.message);
+        setIsSubmit(false);
+        setEmail("");
+        forgotpasswordREf.current.classList.remove("was-validated");
+        setTimeout(() => {
+          navigate("/login");
+        }, 5000);
+      }
+    }
+  };
   return (
     <Wrapper>
       <div className="container">
         <h1 className="text-center mt-3 p-2 fw-bold m-0">Forgot Password</h1>
         <div className="row p-4 m-0">
           <div className="col-md-6  forgot-password">
-            <form className="needs-validation" noValidate>
+            <form
+              ref={forgotpasswordREf}
+              className="needs-validation"
+              noValidate
+              onSubmit={handleForgotPasswordLink}
+            >
               <div className="input-box email mb-3">
                 <label htmlFor="emailInput" className="form-label">
                   <i className="fa fa-envelope" aria-hidden="true"></i> Email
@@ -23,6 +78,8 @@ function ForgotPassword() {
                   className="form-control"
                   aria-describedby="emailInput"
                   required
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
                 />
                 <div className="valid-feedback">Looks good!</div>
                 <div className="invalid-feedback">

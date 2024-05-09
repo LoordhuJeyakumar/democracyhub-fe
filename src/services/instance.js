@@ -1,28 +1,10 @@
 import axios from "axios";
 
-// define the base url for the api
-let isCloud = false;
-const baseURL = isCloud ? "" : `http://localhost:3333/api/v1/`;
 
-// define the instance
+let isDeployed = false;
+const baseURL = isDeployed ? "" : `http://localhost:3333/api/v1/`;
+
 const authInstance = axios.create({
-  baseURL: baseURL,
-  timeout: 10000,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
-
-//define the formData instanse
-const formDataInstance = axios.create({
-  baseURL: baseURL,
-  headers: {
-    "Content-Type": "multipart/form-data",
-  },
-});
-
-// define the protected instance
-const protectedInstance = axios.create({
   baseURL: baseURL,
   timeout: 5000,
   headers: {
@@ -30,7 +12,22 @@ const protectedInstance = axios.create({
   },
 });
 
-// define the interceptor for the protected instance
+const formDataInstance = axios.create({
+  baseURL: baseURL,
+  headers: {
+    "Content-Type": "multipart/form-data",
+  },
+});
+
+const protectedInstance = axios.create({
+  baseURL: baseURL,
+  timeout: 10000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+
 protectedInstance.interceptors.request.use((config) => {
   const accessToken = sessionStorage.getItem("accessToken");
 
@@ -40,5 +37,5 @@ protectedInstance.interceptors.request.use((config) => {
   return config;
 });
 
-// export the instances
+
 export default { authInstance, protectedInstance, baseURL };

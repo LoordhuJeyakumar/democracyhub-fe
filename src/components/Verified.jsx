@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Verified() {
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location);
   useEffect(() => {
     setTimeout(() => {
       navigate("/login");
@@ -25,13 +27,13 @@ function Verified() {
 
       <div className="redirectBox p-3 w-50">
         <h1 className="fw-bold">Just a moment...</h1>
-        <div className="slider">
+        <div className="slider mt-1">
           <div className="line"></div>
           <div className="break dot1"></div>
           <div className="break dot2"></div>
           <div className="break dot3"></div>
         </div>
-        <p className="p-0 m-0">
+        <p className="p-0 mt-4">
           We're redirecting you to our login page... <br />
           If not working?{" "}
           <button

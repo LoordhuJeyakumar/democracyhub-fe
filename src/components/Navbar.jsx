@@ -1,7 +1,9 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const { user, isLoggedIn } = sessionStorage;
+  const navigate = useNavigate();
   return (
     <header className="header fixed-top ">
       <nav className="navbar navbar-expand-lg ">
@@ -25,9 +27,21 @@ function Navbar() {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-            <Link to="/login" className="btn btn-main mx-2">
-              Login
-            </Link>
+            {isLoggedIn ? (
+              <button
+                onClick={() => {
+                  sessionStorage.clear();
+                  navigate("/");
+                }}
+                className="btn btn-main mx-2"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link to="/login" className="btn btn-main mx-2">
+                Login
+              </Link>
+            )}
           </div>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">

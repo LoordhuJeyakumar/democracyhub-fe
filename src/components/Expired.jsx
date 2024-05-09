@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import SendEmail from "./SendEmail";
 
 function Expired() {
   return (
@@ -16,7 +17,7 @@ function Expired() {
           colors="primary:#1c140d,secondary:#cbe86b,tertiary:#acd0c0,quaternary:#f3ffbd"
           style={{ width: "250px", height: "250px" }}
         ></lord-icon>
-        <div>
+        {/*  <div>
           <h1 className="text-center mt-3 p-2 fw-bold m-0">Get reset link</h1>
           <form className="needs-validation" noValidate>
             <div className="input-box email mb-3">
@@ -63,7 +64,8 @@ function Expired() {
               </Link>
             </div>
           </form>
-        </div>
+        </div> */}
+        <SendEmail />
       </div>
     </div>
   );

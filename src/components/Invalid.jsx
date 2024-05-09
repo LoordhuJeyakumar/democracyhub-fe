@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import SendEmail from "./SendEmail";
 
 function Invalid() {
   return (
@@ -16,7 +17,7 @@ function Invalid() {
           style={{ width: "250px", height: "250px" }}
         ></lord-icon>
       </div>
-      <div>
+      {/*  <div>
         <h1 className="text-center mt-3 p-2 fw-bold m-0">Get reset link</h1>
         <form className="needs-validation" noValidate>
           <div className="input-box email mb-3">
@@ -63,7 +64,8 @@ function Invalid() {
             </Link>
           </div>
         </form>
-      </div>
+      </div> */}
+      <SendEmail />
     </div>
   );
 }

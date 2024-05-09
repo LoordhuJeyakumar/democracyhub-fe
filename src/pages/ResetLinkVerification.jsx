@@ -6,6 +6,7 @@ import Invalid from "../components/Invalid";
 import Verified from "../components/Verified";
 
 function ResetLinkVerification() {
+  
   return (
     <div>
       {/* <Verifying /> */}
