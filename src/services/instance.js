@@ -1,8 +1,10 @@
 import axios from "axios";
 
 
-let isDeployed = false;
-const baseURL = isDeployed ? "" : `http://localhost:3333/api/v1/`;
+let isDeployed = true;
+const baseURL = isDeployed
+  ? "https://democracyhub-be.onrender.com/api/v1/"
+  : `http://localhost:3333/api/v1/`;
 
 const authInstance = axios.create({
   baseURL: baseURL,
