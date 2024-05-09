@@ -9,6 +9,7 @@ import EmailSent from "../pages/EmailSent";
 import Redirect from "../pages/Redirect";
 import Dashboard from "../pages/Dashboard";
 import AccountVerification from "../pages/AccountVerification";
+import PasswordResetPage from "../pages/PasswordResetPage";
 
 function AppRoutes() {
   return (
@@ -27,9 +28,10 @@ function AppRoutes() {
           element={<AccountVerification />}
         />
         <Route
-          path="/users/:userId/:resetToken"
+          path="/resetPassword/:userId/:resetToken"
           element={<ResetLinkVerification />}
         />
+        <Route path="/resetPassword" element={<PasswordResetPage />} />
       </Routes>
     </Router>
   );

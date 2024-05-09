@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 function EmailSent() {
   const signupUser = useSelector((state) => state.user.signup);
 
-  console.log(signupUser);
   return (
     <div className="row justify-content-evenly pt-5 emailSentBox">
       <div className="col-12 col-md-4 mx-5 px-5">
