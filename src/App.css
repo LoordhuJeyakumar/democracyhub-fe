@@ -71,17 +71,18 @@ body {
 }
 
 .text-box {
-  margin-top: 12rem;
+  margin-top: 11rem !important;
   text-align: center;
 }
 
 .text-block-1 {
   margin-top: 0;
   text-align: justify;
-  margin-bottom: 15rem;
+
 }
 .text-block-1 h2 {
   color: var(--creamyYellow);
+  text-align:start;
 }
 
 .text-block-2 p strong {
@@ -92,6 +93,7 @@ body {
   font-weight: 600 !important;
   box-shadow: 1px 2px 5px #1c140d;
   border-radius: 20px;
+  background-color:var(--creamyYellow) !important;
 }
 .navbar-nav {
   gap: 10px;
@@ -178,4 +180,20 @@ body {
   to {
     left: 550px;
   }
+}
+.footer{
+  background-color: var(--richBrown);
+  color: var(--creamyYellow);
+}
+/* *********************************************** */
+
+.navbarHome{
+  width: 90%;
+  padding: auto;
+  margin: auto;
+  margin-top: 1.5rem;
+  
+}
+.navbarHome .navbar, .navbarHome{
+  backdrop-filter: blur(10px)
 }

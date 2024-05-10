@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-let isDeployed = true;
+let isDeployed = false;
 const baseURL = isDeployed
   ? "https://democracyhub-be.onrender.com/api/v1/"
   : `http://localhost:3333/api/v1/`;

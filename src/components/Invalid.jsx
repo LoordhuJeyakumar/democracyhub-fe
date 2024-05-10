@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import SendEmail from "./SendEmail";
 
 function Invalid() {
+  const params = useParams();
+
   return (
     <div className="d-flex align-items-center flex-column flex-md-row justify-content-evenly vh-100">
       <div>
@@ -65,7 +67,7 @@ function Invalid() {
           </div>
         </form>
       </div> */}
-      <SendEmail />
+      <SendEmail type={"accountVerification"} />
     </div>
   );
 }

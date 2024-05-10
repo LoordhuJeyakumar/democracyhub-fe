@@ -1,12 +1,10 @@
 import React from "react";
 import Wrapper from "../components/Wrapper";
+import SideNavbar from "../components/SideNavbar";
+import DashboardNav from "../components/DashboardNav";
 
 function Dashboard() {
-  return (
-    <Wrapper>
-      <h1>Dashboard</h1>
-    </Wrapper>
-  );
+  return <div></div>;
 }
 
 export default Dashboard;

@@ -5,11 +5,11 @@ function Navbar() {
   const { user, isLoggedIn } = sessionStorage;
   const navigate = useNavigate();
   return (
-    <header className="header fixed-top ">
-      <nav className="navbar navbar-expand-lg ">
+    <header className="header navbarHome fixed-top rounded-pill">
+      <nav className="navbar navbar-expand-lg rounded-pill">
         <div className="container-fluid d-flex">
           <Link to="/" className="navbar-brand ">
-            <h3 className="fw-bold brand">DemocracyHUB</h3>
+            <h3 className="fw-bold brand my-auto">DemocracyHUB</h3>
           </Link>
 
           <div
@@ -27,25 +27,14 @@ function Navbar() {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-            {isLoggedIn ? (
-              <button
-                onClick={() => {
-                  sessionStorage.clear();
-                  navigate("/");
-                }}
-                className="btn btn-main mx-2"
-              >
-                Logout
-              </button>
-            ) : (
-              <Link to="/login" className="btn btn-main mx-2">
-                Login
-              </Link>
-            )}
+
+            <Link to="/login" className="btn btn-main mx-2">
+              Login
+            </Link>
           </div>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li className="nav-item">
+              <li className="nav-item ">
                 <NavLink className="nav-link " aria-current="page" to={"/"}>
                   About us
                 </NavLink>
@@ -53,7 +42,7 @@ function Navbar() {
               <li className="nav-item">
                 <NavLink
                   to={"elections"}
-                  className="nav-link "
+                  className="nav-link fw-medium"
                   aria-current="page"
                 >
                   Elections
@@ -62,7 +51,7 @@ function Navbar() {
               <li className="nav-item">
                 <NavLink
                   to={"manifestos"}
-                  className="nav-link "
+                  className="nav-link fw-medium"
                   aria-current="page"
                 >
                   Manifestos
@@ -71,7 +60,7 @@ function Navbar() {
               <li className="nav-item">
                 <NavLink
                   to={"localIssues"}
-                  className="nav-link "
+                  className="nav-link fw-medium"
                   aria-current="page"
                 >
                   Local Issues

@@ -23,35 +23,7 @@ function ForgotPassword() {
 
     forgotpasswordREf.current.classList.add("was-validated");
     if (forgotpasswordREf.current.checkValidity()) {
-      const res = await userService.sendVerificationLink(email);
-      console.log(res);
-      if (res?.response?.status === 401) {
-        toast.info(res?.response?.data?.message);
-        setIsSubmit(false);
-        setEmail("");
-        forgotpasswordREf.current.classList.remove("was-validated");
-      }
-      if (res?.response?.status === 403) {
-        toast.info(res?.response?.data?.message);
-        setIsSubmit(false);
-        setEmail("");
-        forgotpasswordREf.current.classList.remove("was-validated");
-      }
-      if (res?.message === "Network Error") {
-        toast.error(res.message);
-        setIsSubmit(false);
-        setEmail("");
-        forgotpasswordREf.current.classList.remove("was-validated");
-      }
-      if (res?.status === 200) {
-        toast.success(res?.data?.message);
-        setIsSubmit(false);
-        setEmail("");
-        forgotpasswordREf.current.classList.remove("was-validated");
-        setTimeout(() => {
-          navigate("/login");
-        }, 5000);
-      }
+      
     }
   };
   return (

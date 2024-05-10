@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import instance from "./instance";
 
-const   userService = {
+const userService = {
   register: async (userData) => {
     try {
       const response = await instance.authInstance.post("users", userData);
@@ -45,6 +45,19 @@ const   userService = {
       const emailObj = { email: email };
       const response = await instance.authInstance.post(
         "users/sendVerificationLink",
+        emailObj
+      );
+      return response;
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
+  },
+  sendResetLink: async (email) => {
+    try {
+      const emailObj = { email: email };
+      const response = await instance.authInstance.post(
+        "users/resetPasswordLink",
         emailObj
       );
       return response;

@@ -2,6 +2,7 @@ import React from "react";
 import fist from "../assets/8070128-ai.png";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 function HomePage() {
   return (
@@ -10,14 +11,14 @@ function HomePage() {
       <main>
         <section className="hero">
           <div className="image-container">
-            <img src={fist} alt="" style={{ width: "100%" }} />
+            <img src={fist} alt="" />
             <div className="overlay">
-              <div className="d-flex justify-content-evenly text-box ">
-                <div className="col-5 text-block-1">
+              <div className="d-flex justify-content-evenly align-items-evenly  text-box row">
+                <div className="col-10 col-md-5 text-block-1 mb-5">
                   <h1 className="display-3  fw-bold">DemocracyHUB</h1>
                   <h2>Empowering citizens to make informed decisions</h2>
                 </div>
-                <div className="col-5 text-block-2">
+                <div className="col-10 col-md-5 text-block-2">
                   <p>
                     Welcome to <strong>DemocracyHub</strong>, your one-stop
                     platform for comprehensive, reliable, and user-friendly
@@ -43,7 +44,7 @@ function HomePage() {
           </div>
         </section>
       </main>
-      <footer></footer>
+      <Footer />
     </div>
   );
 }
