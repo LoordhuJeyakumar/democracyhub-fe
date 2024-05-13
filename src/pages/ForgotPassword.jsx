@@ -9,6 +9,7 @@ function ForgotPassword() {
   const [email, setEmail] = useState("");
   const forgotpasswordREf = useRef(null);
   const [isSubmit, setIsSubmit] = useState(false);
+  const [isEmailSent, setIsEmailSent] = useState(false);
   const navigate = useNavigate();
 
   const handleForgotPasswordLink = async (event) => {
@@ -23,7 +24,34 @@ function ForgotPassword() {
 
     forgotpasswordREf.current.classList.add("was-validated");
     if (forgotpasswordREf.current.checkValidity()) {
-      
+      let res = await userService.sendResetLink(email);
+      console.log(res);
+
+      if (res?.response?.status === 401) {
+        toast.info(res?.response?.data?.message);
+        setIsSubmit(false);
+        setEmail("");
+        forgotpasswordREf.current.classList.remove("was-validated");
+      }
+      if (res?.response?.status === 403) {
+        toast.info(res?.response?.data?.message);
+        setIsSubmit(false);
+        setEmail("");
+        forgotpasswordREf.current.classList.remove("was-validated");
+      }
+      if (res?.message === "Network Error") {
+        toast.error(res.message);
+        setIsSubmit(false);
+        setEmail("");
+        forgotpasswordREf.current.classList.remove("was-validated");
+      }
+      if (res?.status === 200) {
+        toast.success(res?.data?.message);
+        setIsSubmit(false);
+        setEmail("");
+        forgotpasswordREf.current.classList.remove("was-validated");
+        setIsEmailSent(true);
+      }
     }
   };
   return (
@@ -62,9 +90,35 @@ function ForgotPassword() {
                 </div>
               </div>
 
+              {isEmailSent ? (
+                <div
+                  className="alert alert-success d-flex align-items-center"
+                  role="alert"
+                >
+                  <small>
+                    Verification link succesfully sent, please check it out your
+                    email! <i className="bi bi-check-circle-fill"></i>
+                  </small>
+                </div>
+              ) : (
+                ""
+              )}
               <div className="d-flex justify-content-evenly">
-                <button className="btn btn-main w-25" type="submit">
+                <button
+                  className="btn btn-main align-items-center d-flex justify-content-center"
+                  type="submit"
+                >
                   Send Link
+                  {isSubmit ? (
+                    <>
+                      &nbsp;{" "}
+                      <div className="spinner-border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                      </div>
+                    </>
+                  ) : (
+                    ""
+                  )}
                 </button>
                 <button type="reset" className="btn btn-second w-25">
                   Clear

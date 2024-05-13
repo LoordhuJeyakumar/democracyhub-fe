@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import userService from "../services/userService";
 
 function SendEmail({ type }) {
+  console.log(type);
   const [email, setEmail] = useState("");
   const [isSubmit, setIsSubmit] = useState(false);
   const getLinkFormRef = useRef(null);
@@ -19,7 +20,7 @@ function SendEmail({ type }) {
     getLinkFormRef.current.classList.add("was-validated");
     if (getLinkFormRef.current.checkValidity()) {
       const res = await userService.sendResetLink(email);
-      console.log(res);
+
       if (res?.response?.status === 401) {
         toast.info(res?.response?.data?.message);
         setIsSubmit(false);
@@ -95,19 +96,13 @@ function SendEmail({ type }) {
   return (
     <div>
       <h1 className="text-center mt-3 p-2 fw-bold m-0">
-        {type === "accountVerification"
-          ? "Get verification link"
-          : "Get reset link"}
+        {type === "reset" ? " Get reset link" : "Get verification link"}
       </h1>
       <form
         ref={getLinkFormRef}
         className="needs-validation"
         noValidate
-        onSubmit={
-          type === "accountVerification"
-            ? handleGetVerification
-            : handleGetReset
-        }
+        onSubmit={type === "reset" ? handleGetReset : handleGetVerification}
       >
         <div className="input-box email mb-3">
           <label htmlFor="emailInput" className="form-label">
@@ -127,7 +122,9 @@ function SendEmail({ type }) {
           <div className="valid-feedback">Looks good!</div>
           <div className="invalid-feedback">Please enter your email!.</div>
           <div className="form-text">
-            Please enter your email to get password reset link.
+            Please enter your email to get password{" "}
+            {!type === "accountVerification" ? " verification" : " reset "}{" "}
+            link.
           </div>
         </div>
 

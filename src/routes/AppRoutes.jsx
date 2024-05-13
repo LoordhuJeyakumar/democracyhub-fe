@@ -10,6 +10,7 @@ import Redirect from "../pages/Redirect";
 import Dashboard from "../pages/Dashboard";
 import AccountVerification from "../pages/AccountVerification";
 import PasswordResetPage from "../pages/PasswordResetPage";
+import SendEmail from "../components/SendEmail";
 
 function AppRoutes() {
   return (
@@ -31,7 +32,11 @@ function AppRoutes() {
           path="/resetPassword/:userId/:resetToken"
           element={<ResetLinkVerification />}
         />
-        <Route path="/resetPassword" element={<PasswordResetPage />} />
+        <Route
+          path="/resetPassword"
+          state={"reset"}
+          element={<PasswordResetPage />}
+        />
       </Routes>
     </Router>
   );

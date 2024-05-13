@@ -40,6 +40,17 @@ const userService = {
       return error;
     }
   },
+  resetToken: async (resetToken, userId) => {
+    try {
+      const response = await instance.authInstance.get(
+        `users/resetPassword/${userId}/${resetToken}`
+      );
+      return response;
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
+  },
   sendVerificationLink: async (email) => {
     try {
       const emailObj = { email: email };

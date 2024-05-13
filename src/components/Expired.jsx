@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SendEmail from "./SendEmail";
 
-function Expired() {
+function Expired({type}) {
+  console.log(type);
   return (
     <div className="d-flex align-items-center justify-content-center vh-100">
       <div className="d-flex  d-flex flex-md-row flex-column justify-content-center align-items-center  ">
@@ -65,7 +66,7 @@ function Expired() {
             </div>
           </form>
         </div> */}
-        <SendEmail />
+        <SendEmail type={type}/>
       </div>
     </div>
   );

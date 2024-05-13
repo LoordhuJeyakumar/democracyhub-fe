@@ -4,6 +4,7 @@ import AppRoutes from "./routes/AppRoutes";
 import { Flip, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-toastify/dist/ReactToastify.min.css";
+import "./components/root.css";
 
 function App() {
   return (

@@ -154,6 +154,9 @@ function LoginPage() {
                 <p className="text-center mt-3 opacity-75">
                   <small>If you forgot your password? </small>
                   <Link to={"/forget-password"}>Click here</Link>
+                  <br />
+                  <small>Resend verification email </small>
+                  <Link to={"/sendEmail"}>Click here</Link>
                 </p>
               </div>
             </form>

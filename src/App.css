@@ -88,13 +88,20 @@ body {
 .text-block-2 p strong {
   color: var(--creamyYellow);
 }
+/* .nav-item >.active{
+  color: #fff;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  background-color: #c7c7c733 !important;
+}
 .active {
   border-bottom: 1px solid #1c140d !important;
   font-weight: 600 !important;
   box-shadow: 1px 2px 5px #1c140d;
   border-radius: 20px;
   background-color:var(--creamyYellow) !important;
-}
+  color: var(--richBrown) !important;
+} */
 .navbar-nav {
   gap: 10px;
 }
@@ -184,6 +191,7 @@ body {
 .footer{
   background-color: var(--richBrown);
   color: var(--creamyYellow);
+  font-size: .85rem;
 }
 /* *********************************************** */
 
