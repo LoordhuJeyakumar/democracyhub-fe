@@ -7,6 +7,13 @@ function SideNavbar() {
   const userParsed = JSON.parse(sessionStorage.getItem("user"));
   const [profileTabActive, setProfileTabActive] = useState(false);
   const [dashboardTabActive, setDashboardTabActive] = useState(false);
+  const [electionsTabActive, setElectionsTabActive] = useState(false);
+
+  const [navTabOpen, setNavTabOpen] = useState({
+    profile: false,
+    dashboard: false,
+    election: false,
+  });
   const navigate = useNavigate();
   const handleSignOut = async () => {
     sessionStorage.clear();
@@ -31,6 +38,7 @@ function SideNavbar() {
     setDashboardTabActive(false);
   };
 
+  const handleElectionTabOpen = () => {};
   const handleDashboardTabOpen = () => {
     setDashboardTabActive(true);
     setProfileTabActive(false);
@@ -75,7 +83,7 @@ function SideNavbar() {
               <ul className="nav ">
                 <li className="nav-item">
                   <NavLink
-                    className="nav-link text-w hite"
+                    className="nav-link "
                     to={"/profile"}
                     onClick={handleProfileTabOpen}
                   >
@@ -115,6 +123,7 @@ function SideNavbar() {
             </div>
           </li>
           <hr className="horizontal light mt-0" />
+
           <li className="nav-item">
             <a
               data-bs-toggle="collapse"
@@ -150,7 +159,7 @@ function SideNavbar() {
                 </li>
                 <li className="nav-item ">
                   <NavLink
-                    to="/create-account"
+                    to="/elections"
                     className="nav-link  d-flex justify-content-between"
                   >
                     <span className="sidenav-normal  ms-2  ps-1">
@@ -167,6 +176,8 @@ function SideNavbar() {
               </ul>
             </div>
           </li>
+          {/* ******************************************** */}
+          {/*  */}
         </ul>
       </div>
     </aside>

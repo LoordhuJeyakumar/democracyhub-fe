@@ -11,6 +11,7 @@ import Dashboard from "../pages/Dashboard";
 import AccountVerification from "../pages/AccountVerification";
 import PasswordResetPage from "../pages/PasswordResetPage";
 import SendEmail from "../components/SendEmail";
+import Elections from "../pages/Elections";
 
 function AppRoutes() {
   return (
@@ -37,6 +38,7 @@ function AppRoutes() {
           state={"reset"}
           element={<PasswordResetPage />}
         />
+        <Route path="/elections" element={<Elections />} />
       </Routes>
     </Router>
   );

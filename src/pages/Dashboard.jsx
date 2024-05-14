@@ -1,15 +1,12 @@
 import React from "react";
-import Wrapper from "../components/Wrapper";
-import SideNavbar from "../components/SideNavbar";
-import DashboardNav from "../components/DashboardNav";
-import TopNavBar from "../components/TopNavBar";
+
+import MainWrapper from "../components/MainWrapper";
 
 function Dashboard() {
   return (
-    <div className="g-sidenav-show bg-gray-200 dark-version">
-      <SideNavbar />
-      <TopNavBar />
-    </div>
+    <MainWrapper>
+      <div>Dashboard</div>
+    </MainWrapper>
   );
 }
 
