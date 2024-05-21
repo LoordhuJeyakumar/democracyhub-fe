@@ -19,7 +19,7 @@ function TopNavBar({ setSideNavShow, sideNavShow }) {
   };
   return (
     <nav
-      className="navbar navbar-main navbar-expand-lg px-0 mx-4 border-radius-xl position-sticky top-1 z-index-sticky shadow-none shadow-blur"
+      className="navbar navbar-main navbar-expand-lg px-0 mx-4 border-radius-xl position-sticky top-1 z-index-sticky shadow-none shadow-blur top-navbar rounded-pill"
       id="navbarBlur"
       data-scroll="true"
     >

@@ -11,9 +11,12 @@ import Dashboard from "../pages/Dashboard";
 import AccountVerification from "../pages/AccountVerification";
 import PasswordResetPage from "../pages/PasswordResetPage";
 import SendEmail from "../components/SendEmail";
-import Elections from "../pages/Elections";
+import Elections, { ElectionsDashboard } from "../pages/Elections";
+import ElectionsHomePage from "../pages/Elections";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 function AppRoutes() {
+  const { user, isLoggedIn } = sessionStorage;
   return (
     <Router>
       <Routes>
@@ -24,7 +27,10 @@ function AppRoutes() {
         <Route path="/verification" element={<ResetLinkVerification />} />
         <Route path="/emailSent" element={<EmailSent />} />
         <Route path="/redirect" element={<Redirect />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
         <Route
           path="/users/:userId/:verifyToken"
           element={<AccountVerification />}
@@ -38,7 +44,10 @@ function AppRoutes() {
           state={"reset"}
           element={<PasswordResetPage />}
         />
-        <Route path="/elections" element={<Elections />} />
+        <Route
+          path="/elections"
+          element={isLoggedIn ? <ElectionsDashboard /> : <ElectionsHomePage />}
+        />
       </Routes>
     </Router>
   );

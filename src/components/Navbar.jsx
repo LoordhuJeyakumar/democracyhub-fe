@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const { user, isLoggedIn } = sessionStorage;
+  console.log(isLoggedIn);
   const navigate = useNavigate();
   return (
     <header className="header navbarHome fixed-top rounded-pill">
@@ -41,7 +42,7 @@ function Navbar() {
               </li>
               <li className="nav-item">
                 <NavLink
-                  to={"elections"}
+                  to={"/elections"}
                   className="nav-link fw-medium"
                   aria-current="page"
                 >

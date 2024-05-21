@@ -213,7 +213,8 @@ body {
 .electionNav{
   background-color: var(--richBrown);
   box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
-
+  position: fixed;
+  
 }
 .electionNav .nav-item a{
   color: var(--creamyYellow)  ;
@@ -540,4 +541,11 @@ body {
 
 .desc li{
   padding: 0;
+}
+
+.top-navbar{
+
+  top: 1rem;
+  z-index: 999;
+  backdrop-filter: blur(10px);
 }
