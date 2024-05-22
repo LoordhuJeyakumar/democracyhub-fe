@@ -94,6 +94,7 @@ function LoginPage() {
                   required
                   value={loginUser?.email}
                   onChange={handleLoginInputChange}
+                  autoComplete=""
                 />
                 <div className="valid-feedback">Looks good!</div>
                 <div className="invalid-feedback">Please enter your email.</div>
@@ -113,6 +114,7 @@ function LoginPage() {
                   required
                   value={loginUser.password}
                   onChange={handleLoginInputChange}
+                  autoComplete=""
                 />
                 <div className="valid-feedback">Looks good!</div>
                 <div className="invalid-feedback">Please enter password.</div>

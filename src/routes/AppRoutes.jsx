@@ -14,6 +14,8 @@ import SendEmail from "../components/SendEmail";
 import Elections, { ElectionsDashboard } from "../pages/Elections";
 import ElectionsHomePage from "../pages/Elections";
 import ProtectedRoutes from "./ProtectedRoutes";
+import UserProfile from "../pages/UserProfile";
+import ProfileSettings from "../pages/ProfileSettings";
 
 function AppRoutes() {
   const { user, isLoggedIn } = sessionStorage;
@@ -30,6 +32,8 @@ function AppRoutes() {
 
         <Route element={<ProtectedRoutes />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/profileSettings" element={<ProfileSettings />} />
         </Route>
         <Route
           path="/users/:userId/:verifyToken"

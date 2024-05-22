@@ -9,8 +9,8 @@ function MainWrapper({ children }) {
     <div
       className={
         sideNavShow
-          ? "g-sidenav-show g-sidenav-pinned bg-gray-200 dark-version"
-          : "g-sidenav-show bg-gray-200 dark-version"
+          ? "g-sidenav-show g-sidenav-pinned bg-gray-200 dark-version "
+          : "g-sidenav-show bg-gray-200 dark-version "
       }
     >
       <SideNavbar />

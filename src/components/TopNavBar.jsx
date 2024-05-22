@@ -17,6 +17,11 @@ function TopNavBar({ setSideNavShow, sideNavShow }) {
       setSideNavShow(true);
     }
   };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
   return (
     <nav
       className="navbar navbar-main navbar-expand-lg px-0 mx-4 border-radius-xl position-sticky top-1 z-index-sticky shadow-none shadow-blur top-navbar rounded-pill"
@@ -125,15 +130,15 @@ function TopNavBar({ setSideNavShow, sideNavShow }) {
               </a>
             </li>
             <li className="nav-item ">
-              <a
+              <button
                 className="nav-link p-0 position-relative text-body"
-                href="/dashboard"
+                onClick={handleLogout}
               >
                 <i
                   className="fa-solid fa-right-from-bracket"
                   aria-hidden="true"
                 ></i>
-              </a>
+              </button>
             </li>
           </ul>
         </div>

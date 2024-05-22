@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 1;
 
 function SideNavbar() {
+  const user = useSelector((state) => state.user);
+  console.log(user);
   const location = useLocation();
-  const userParsed = JSON.parse(sessionStorage.getItem("user"));
+  const userParsed = JSON.parse(localStorage.getItem("user"));
   const [profileTabActive, setProfileTabActive] = useState(false);
   const [dashboardTabActive, setDashboardTabActive] = useState(false);
   const [electionsTabActive, setElectionsTabActive] = useState(false);
@@ -14,6 +17,7 @@ function SideNavbar() {
     dashboard: false,
     election: false,
   });
+  console.log(userParsed);
   const navigate = useNavigate();
   const handleSignOut = async () => {
     sessionStorage.clear();
@@ -42,6 +46,10 @@ function SideNavbar() {
   const handleDashboardTabOpen = () => {
     setDashboardTabActive(true);
     setProfileTabActive(false);
+  };
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
   };
   return (
     <aside
@@ -74,7 +82,9 @@ function SideNavbar() {
               aria-expanded="false"
             >
               <span className="material-symbols-outlined">account_circle</span>
-              <span className="nav-link-text ms-2 ps-1">user name</span>
+              <span className="nav-link-text ms-2 ps-1 text-capitalize">
+                {user?.details?.name}
+              </span>
             </a>
             <div
               className={profileTabActive ? "collapse show" : "collapse"}
@@ -112,12 +122,16 @@ function SideNavbar() {
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <a type="button" className="nav-link  ">
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="nav-link  "
+                  >
                     <span className="material-symbols-outlined sidenav-mini-icon">
                       logout
                     </span>
                     <span className="sidenav-normal  ms-3  ps-1"> Logout </span>
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>

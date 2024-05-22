@@ -21,9 +21,9 @@ const initialState = {
       state: null,
       pincode: null,
     },
-    role: "",
+
     dob: null,
-    doj: null,
+
     accessToken: "",
   },
 };
@@ -79,6 +79,16 @@ const userReducer = (state = initialState, action) => {
         ...state,
         login: {
           ...initialState.login,
+        },
+      };
+
+    case "SET_USER_DETAILS":
+      return {
+        ...state,
+        isLoggedIn: true,
+        details: {
+          ...state.details,
+          ...action.payload,
         },
       };
   }

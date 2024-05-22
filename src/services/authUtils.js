@@ -1,17 +1,22 @@
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 const authUtils = {
   isAuthenticated: function () {
+    const navigate = useNavigate();
     try {
-      const token = localStorage.getItem("token");
-      console.log(token);
+      const { accessToken: token, isLoggedIn, user, expiresAt } = localStorage;
+      console.log(JSON.parse(expiresAt));
       if (!token) {
         return false;
       }
 
-      /*  const expirationDate = new Date(decodedToken.exp * 1000);
-      if (expirationDate < new Date()) {
+      if (expiresAt < new Date()) {
+        toast.error("session expired please log-in again");
+        navigate("/login");
         return false;
       }
- */
+
       return true;
     } catch (error) {
       console.error("Error in isAuthenticated function: ", error);

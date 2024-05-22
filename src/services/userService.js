@@ -19,9 +19,13 @@ const userService = {
         userData
       );
       if (response?.data?.accessToken) {
-        sessionStorage.setItem("user", JSON.stringify(response.data));
-        sessionStorage.setItem("accessToken", response.data.accessToken);
-        sessionStorage.setItem("isLoggedIn", true);
+        localStorage.setItem("user", JSON.stringify(response.data));
+        localStorage.setItem("accessToken", response.data.accessToken);
+        localStorage.setItem("isLoggedIn", true);
+        localStorage.setItem(
+          "expiresAt",
+          Date.now() + response.data.expiresIn * 1000
+        );
       }
       return response;
     } catch (error) {
@@ -83,6 +87,16 @@ const userService = {
         `/users/resetPassword/${userId}`,
         passswordObj
       );
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
+  },
+  getUserDetails: async (id) => {
+    try {
+      const response = await instance.protectedInstance.get(`/users/${id}`);
+
+      return response.data;
     } catch (error) {
       console.error(error);
       return error;

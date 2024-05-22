@@ -1,14 +1,24 @@
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 function Redirect() {
   const navigate = useNavigate();
-  const { accessToken, user } = sessionStorage;
+  const dispatch = useDispatch();
+  const { accessToken, user } = localStorage;
   const userDetails = JSON.parse(user);
-
+  console.log(userDetails);
   useEffect(() => {
     handleRedirect();
+    setUserDetails();
   }, []);
+
+  const setUserDetails = () => {
+    dispatch({
+      type: "SET_USER_DETAILS",
+      payload: userDetails.loggedInUser,
+    });
+  };
 
   const handleRedirect = () => {
     if (accessToken) {
@@ -18,7 +28,7 @@ function Redirect() {
     }
   };
   return (
-    <div className="d-flex flex-column pt-5 align-items-center justify-content-center">
+    <div className="d-flex flex-column pt-5 align-items-center justify-content-center vh-100">
       <div className="pb-2 mb-5">
         <div className="">
           <span className="h1">Welcome! {},</span>{" "}
@@ -40,7 +50,7 @@ function Redirect() {
           style={{ width: "250px", height: "250px" }}
         ></lord-icon>
       </div>
-      <div className="slider top-50 mt-5 pt-5">
+      <div className="slider top-50 pt-5" style={{ marginTop: "8.4rem" }}>
         <div className="line"></div>
         <div className="break dot1"></div>
         <div className="break dot2"></div>
