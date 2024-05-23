@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function TopNavBar({ setSideNavShow, sideNavShow }) {
   const location = useLocation();
@@ -32,7 +32,7 @@ function TopNavBar({ setSideNavShow, sideNavShow }) {
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li className="breadcrumb-item text-sm">
-              <a className="opacity-3 " href="/dashboard">
+              <Link className="opacity-3 " to="/dashboard">
                 <svg
                   width="12px"
                   height="12px"
@@ -63,15 +63,15 @@ function TopNavBar({ setSideNavShow, sideNavShow }) {
                     </g>
                   </g>
                 </svg>
-              </a>
+              </Link>
             </li>
             <li className="breadcrumb-item text-sm">
-              <a
+              <Link
                 className="opacity-5 text-decoration-none text-brown"
-                href="/dashboard"
+                to={"/dashboard"}
               >
                 Pages
-              </a>
+              </Link>
             </li>
             <li
               className="breadcrumb-item text-sm active  text-capitalize"
@@ -103,31 +103,28 @@ function TopNavBar({ setSideNavShow, sideNavShow }) {
               </button>
             </li>
             <li className="nav-item">
-              <a
+              <Link
                 className="nav-link p-0 position-relative text-body"
-                href="/profile"
+                to="/profile"
               >
                 <i className="material-icons me-sm-1">account_circle</i>
-              </a>
+              </Link>
             </li>
             <li className="nav-item px-3">
-              <a className="nav-link p-0 text-body" href="/profileSettings">
+              <Link className="nav-link p-0 text-body" href="/profileSettings">
                 <i className="material-icons fixed-plugin-button-nav cursor-pointer">
                   settings
                 </i>
-              </a>
+              </Link>
             </li>
             <li className="nav-item dropdown pe-4">
-              <a
-                className="nav-link p-0 position-relative text-body"
-                href="/approveRequests"
-              >
+              <Link className="nav-link p-0 position-relative text-body" to="/">
                 <i className="material-icons cursor-pointer">notifications</i>
                 <span className="position-absolute top-5 start-100 translate-middle badge rounded-pill  border border-white small py-1 px-2   bg-success">
                   <span className="small">0</span>
                   <span className="visually-hidden">unread notifications</span>
                 </span>
-              </a>
+              </Link>
             </li>
             <li className="nav-item ">
               <button

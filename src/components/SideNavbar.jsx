@@ -5,7 +5,7 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 
 function SideNavbar() {
   const user = useSelector((state) => state.user);
-  console.log(user);
+
   const location = useLocation();
   const userParsed = JSON.parse(localStorage.getItem("user"));
   const [profileTabActive, setProfileTabActive] = useState(false);
@@ -17,7 +17,7 @@ function SideNavbar() {
     dashboard: false,
     election: false,
   });
-  console.log(userParsed);
+
   const navigate = useNavigate();
   const handleSignOut = async () => {
     sessionStorage.clear();
@@ -36,7 +36,10 @@ function SideNavbar() {
       handleDashboardTabOpen();
     }
   }, [location.pathname]);
+  useEffect(()=>{
 
+  },[])
+  
   const handleProfileTabOpen = () => {
     setProfileTabActive(true);
     setDashboardTabActive(false);
@@ -122,16 +125,16 @@ function SideNavbar() {
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <button
-                    type="button"
+                  <NavLink
+                    to={"/login"}
                     onClick={handleLogout}
-                    className="nav-link  "
+                    className="nav-link "
                   >
                     <span className="material-symbols-outlined sidenav-mini-icon">
                       logout
                     </span>
                     <span className="sidenav-normal  ms-3  ps-1"> Logout </span>
-                  </button>
+                  </NavLink>
                 </li>
               </ul>
             </div>

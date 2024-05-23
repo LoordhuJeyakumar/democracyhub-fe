@@ -213,7 +213,7 @@ body {
 .electionNav  {
   background-color: var(--richBrown);
   box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
-  position: fixed;
+  
   
 }
 .electionNav .nav-item a{
@@ -568,12 +568,15 @@ body {
 .userEdit-menu-card{
   background-color: var(--richBrown) !important;
   color: var(--creamyYellow);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .userEdit-menu-card .nav-link{
   color: var(--creamyYellow);
 }
-
+.Toastify{
+  z-index: 99999;
+}
 .profile-settings .card{
   background-color: var(--mutedGreen) !important;
   box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;

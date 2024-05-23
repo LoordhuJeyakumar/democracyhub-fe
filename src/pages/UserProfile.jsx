@@ -8,7 +8,7 @@ function UserProfile() {
   let userDetails = user.details;
   console.log(userDetails);
   return (
-    <MainWrapper>
+    <div className="vh-100">
       <div className="card card-body mx-3 mx-md-4 mt-5 user-details-card">
         <div className="row gx-4 mb-2">
           <div className="col-auto">
@@ -160,7 +160,7 @@ function UserProfile() {
           </div>
         </div>
       </div>
-    </MainWrapper>
+    </div>
   );
 }
 

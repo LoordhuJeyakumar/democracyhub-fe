@@ -6,7 +6,6 @@ const authUtils = {
     const navigate = useNavigate();
     try {
       const { accessToken: token, isLoggedIn, user, expiresAt } = localStorage;
-      console.log(JSON.parse(expiresAt));
       if (!token) {
         return false;
       }

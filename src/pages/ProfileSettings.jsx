@@ -3,6 +3,7 @@ import MainWrapper from "../components/MainWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import userService from "../services/userService";
+import { toast } from "react-toastify";
 
 function ProfileSettings() {
   const { basicInfo, changePassword } = useSelector((state) => state.editUser);
@@ -31,16 +32,23 @@ function ProfileSettings() {
 
   const getUser = async () => {
     const res = await userService.getUserDetails(userParsed.id);
-
+    console.log(res);
     if (res?.code === "ERR_NETWORK") {
       toast.error(res.message);
       return;
     }
     if (res?.user) {
+      toast.success(res.message);
       setIsFetched(true);
       setFetchedUser(res.user);
       const { name, email, phone, dob, addressDetails } = res.user;
-      let newObj = { name, email, phone, dob, addressDetails };
+      let newObj = {
+        name: name ? name : "",
+        email: email ? email : "",
+        phone: phone ? phone : "",
+        dob: dob ? new Date(dob).toISOString().split("T")[0] : "",
+        addressDetails,
+      };
       dispatch({
         type: "SET_BASICINFO",
         payload: newObj,
@@ -120,18 +128,16 @@ function ProfileSettings() {
     }
     basicInfoFormRef.current.classList.add("was-validated");
     if (basicInfoFormRef.current.checkValidity()) {
-      const res = await authService.updateUserDetails(id, updateObj);
-
-      if (
-        res.status === 200 &&
-        res.data.message == "User updated successfully "
-      ) {
+      const res = await userService.updateUserDetails(id, updateObj);
+      console.log(res);
+      if (res.status === 200) {
         toast.success("User details are updated successfuly!");
         dispatch({
           type: "UNSET_BASICINFO",
         });
         setFetchedUser("");
         setIsFetched(false);
+        basicInfoFormRef.current.classList.remove("was-validated");
       } else {
         toast.error("Error updating the user");
       }
@@ -240,10 +246,10 @@ function ProfileSettings() {
     }
   };
   return (
-    <MainWrapper>
+    <div>
       <div className="container-fluid my-3 py-3">
         <div
-          className="modal fade deactivate"
+          className="modal fade deactivate text-light"
           id="handleDeactivateModal"
           data-bs-backdrop="static"
           data-bs-keyboard="false"
@@ -259,7 +265,7 @@ function ProfileSettings() {
                 </h1>
                 <button
                   type="button"
-                  className="btn-close"
+                  className="btn-close bg-light"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
@@ -309,7 +315,7 @@ function ProfileSettings() {
           aria-labelledby="handleDeleteModal"
           aria-hidden="true"
         >
-          <div className="modal-dialog ">
+          <div className="modal-dialog text-light">
             <div className="modal-content bg-dark">
               <div className="modal-header">
                 <h1 className="modal-title fs-5" id="handleDeleteModal">
@@ -317,7 +323,7 @@ function ProfileSettings() {
                 </h1>
                 <button
                   type="button"
-                  className="btn-close"
+                  className="btn-close bg-light"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                   ref={modalCloseBtnRef}
@@ -334,7 +340,7 @@ function ProfileSettings() {
               <div className="modal-footer p-3 d-flex justify-content-evenly">
                 <button
                   type="button"
-                  className="btn btn-info bg-gradient-secondary"
+                  className="btn btn-info "
                   data-bs-dismiss="modal"
                   ref={modalCloseBtnRef}
                 >
@@ -370,8 +376,8 @@ function ProfileSettings() {
         </div>
         <div className="row mb-5">
           <div className="col-lg-3">
-            <div className="card position-sticky top-1 ">
-              <ul className="nav flex-column     border-radius-lg p-3 settingsNav userEdit-menu-card">
+            <div className="card position-sticky  " style={{ top: 90 }}>
+              <ul className="nav flex-column   rounded   p-3 settingsNav userEdit-menu-card">
                 <li className="nav-item">
                   <a
                     className="nav-link d-flex "
@@ -732,7 +738,7 @@ function ProfileSettings() {
           </div>
         </div>
       </div>
-    </MainWrapper>
+    </div>
   );
 }
 

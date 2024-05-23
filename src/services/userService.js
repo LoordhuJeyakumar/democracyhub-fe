@@ -87,6 +87,7 @@ const userService = {
         `/users/resetPassword/${userId}`,
         passswordObj
       );
+      return response;
     } catch (error) {
       console.error(error);
       return error;
@@ -97,6 +98,18 @@ const userService = {
       const response = await instance.protectedInstance.get(`/users/${id}`);
 
       return response.data;
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
+  },
+  updateUserDetails: async (id, updateObj) => {
+    try {
+      const response = await instance.protectedInstance.put(
+        `/users/${id}`,
+        updateObj
+      );
+      return response;
     } catch (error) {
       console.error(error);
       return error;
