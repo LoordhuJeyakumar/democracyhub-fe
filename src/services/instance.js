@@ -1,9 +1,11 @@
 import axios from "axios";
 import { config } from "../utils/config";
 
-let isDeployed = config.IS_DEPLOYED;
-const baseURL = isDeployed ? config.API_URL_CLOUD : config.API_URL_LOCAL;
-
+let isDeployed = config.VITE_IS_DEPLOYED === "true";
+let baseURL = isDeployed
+  ? config.VITE_API_URL_CLOUD
+  : config.VITE_API_URL_LOCAL;
+console.log(baseURL, config.VITE_IS_DEPLOYED);
 const authInstance = axios.create({
   baseURL: baseURL,
   timeout: 10000,
