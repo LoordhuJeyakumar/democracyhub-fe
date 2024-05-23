@@ -75,7 +75,7 @@ function AccountVerification() {
       return <Verified />;
     }
   };
-  return <>{renderPage()}</>;
+  return <div className="vh-100">{renderPage()}</div>;
 }
 
 export default AccountVerification;

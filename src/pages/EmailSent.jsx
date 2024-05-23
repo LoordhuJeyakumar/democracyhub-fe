@@ -6,7 +6,7 @@ function EmailSent() {
   const signupUser = useSelector((state) => state.user.signup);
 
   return (
-    <div className="row justify-content-evenly pt-5 emailSentBox">
+    <div className="row justify-content-evenly pt-5 emailSentBox vh-100">
       <div className="col-12 col-md-4 mx-5 px-5">
         <h2>Registered successfully</h2>
         <h1></h1>
