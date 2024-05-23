@@ -4,11 +4,11 @@ import Wrapper from "../components/Wrapper";
 
 export default function Elections  () {
   return (
-    <div className="container-fluid m-2 mt-5 pt-3">
+    <div className="container-fluid m-2 mt-5 pt-3 ">
       <div className="row">
         <h1 className="text-center">Current Elections</h1>
         <div className="col-lg-3">
-          <div className="card position-sticky " style={{top:90}}>
+          <div className="card position-sticky " style={{ top: 90 }}>
             <ul className="nav flex-column  border-radius-lg p-3 electionNav rounded">
               <li className="nav-item">
                 <a

@@ -8,7 +8,7 @@ import "./components/root.css";
 
 function App() {
   return (
-    <div>
+    <div className="vh-100">
       <ToastContainer
         position="bottom-left"
         autoClose={5000}

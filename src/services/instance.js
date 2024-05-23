@@ -5,7 +5,7 @@ let isDeployed = config.VITE_IS_DEPLOYED === "true";
 let baseURL = isDeployed
   ? config.VITE_API_URL_CLOUD
   : config.VITE_API_URL_LOCAL;
-console.log(baseURL, config.VITE_IS_DEPLOYED);
+
 const authInstance = axios.create({
   baseURL: baseURL,
   timeout: 10000,

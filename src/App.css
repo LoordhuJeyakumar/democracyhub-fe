@@ -10,10 +10,11 @@
   font-family: "Poppins", sans-serif;
   box-sizing: border-box;
 }
-#root {
+#root, #root>div,body {
   background-color: var(--creamyWhite) !important;
- 
+
 }
+
 .brand{
   font-weight: 700 !important;
   color: var(--richBrown);

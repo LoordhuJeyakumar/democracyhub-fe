@@ -22,7 +22,7 @@ import Elections from "../pages/Elections";
 
 function AppRoutes() {
   const { user, isLoggedIn } = localStorage;
-  console.log(isLoggedIn);
+
   return (
     <Router>
       {/* <Routes>

@@ -49,7 +49,7 @@ function RegisterPage() {
     registerFormRef.current.classList.add("was-validated");
     if (registerFormRef.current.checkValidity()) {
       const res = await userService.register(signupUser);
-      console.log(res);
+
       if (res?.response?.status === 409) {
         toast.info(res?.response?.data?.message);
         setIsSubmit(false);
@@ -75,9 +75,9 @@ function RegisterPage() {
   };
 
   return (
-    <div>
+    <div className="vh-100">
       <Wrapper>
-        <div className="container h-100">
+        <div className="container ">
           <div>
             <h1 className="text-center mt-3 p-2 fw-bold">Register</h1>
             <div className="row">
@@ -98,6 +98,7 @@ function RegisterPage() {
                     </label>
 
                     <input
+                      autoComplete=""
                       name="name"
                       type="text"
                       id="nameInput"
@@ -119,6 +120,7 @@ function RegisterPage() {
                     </label>
 
                     <input
+                      autoComplete=""
                       name="email"
                       type="email"
                       id="emailInput"
@@ -139,6 +141,7 @@ function RegisterPage() {
                     </label>
 
                     <input
+                      autoComplete=""
                       name="password"
                       type="password"
                       id="password"
@@ -165,6 +168,7 @@ function RegisterPage() {
                     </label>
 
                     <input
+                      autoComplete=""
                       ref={confirmPasswordRef}
                       name="confirmPassword"
                       type="password"

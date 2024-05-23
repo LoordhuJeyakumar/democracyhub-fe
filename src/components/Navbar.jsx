@@ -2,8 +2,7 @@ import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
 function Navbar() {
-  const { user, isLoggedIn } = sessionStorage;
-  console.log(isLoggedIn);
+  const { user, isLoggedIn } = localStorage;
   const navigate = useNavigate();
   return (
     <header className="header navbarHome fixed-top rounded-pill">
