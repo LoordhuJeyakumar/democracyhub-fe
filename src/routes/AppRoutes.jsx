@@ -19,6 +19,10 @@ import ProfileSettings from "../pages/ProfileSettings";
 import authUtils from "../services/authUtils";
 import RoleBasedAuthRoute from "./RoleBasedAuthRoute";
 import Elections from "../pages/Elections";
+import AdminDashboard from "../pages/AdminDashboard";
+import AdminRoutes from "./AdminRoutes";
+import Wrapper from "../components/Wrapper";
+import LocalIssues from "../pages/LocalIssues";
 
 function AppRoutes() {
   const { user, isLoggedIn } = localStorage;
@@ -81,13 +85,37 @@ function AppRoutes() {
         />
 
         <Route
-          path="/dashboard"
+          path="/elections"
           element={
-            <RoleBasedAuthRoute>
-              <Dashboard />
-            </RoleBasedAuthRoute>
+            <Wrapper>
+              <Elections />
+            </Wrapper>
           }
         />
+        <Route
+          path="/localIssues"
+          element={
+            <Wrapper>
+              <LocalIssues />
+            </Wrapper>
+          }
+        />
+        <Route element={<AdminRoutes />}>
+          <Route
+            path="/admin-dashboard"
+            element={
+              <RoleBasedAuthRoute>
+                <AdminDashboard />
+              </RoleBasedAuthRoute>
+            }
+          />
+        </Route>
+
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/user/elections" element={<Elections />} />
+        </Route>
+
         <Route
           path="/profile"
           element={
@@ -101,15 +129,6 @@ function AppRoutes() {
           element={
             <RoleBasedAuthRoute>
               <ProfileSettings />
-            </RoleBasedAuthRoute>
-          }
-        />
-
-        <Route
-          path="/elections"
-          element={
-            <RoleBasedAuthRoute>
-              <Elections />
             </RoleBasedAuthRoute>
           }
         />

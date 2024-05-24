@@ -34,7 +34,7 @@ function LoginPage() {
     loginFormRef.current.classList.add("was-validated");
     if (loginFormRef.current.checkValidity()) {
       const res = await userService.login(loginUser);
-      console.log(res);
+
       if (res?.response?.status === 401) {
         toast.info(res?.response?.data?.message);
         setIsSubmit(false);

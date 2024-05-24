@@ -111,6 +111,20 @@ body {
   gap: 10px;
 }
 
+.home-navbar .nav-link:hover, .home-navbar .nav-item:hover{
+  background-color: var(--richBrown);
+  color: var(--creamyYellow);
+  border-radius: 1.5rem;
+  transition: all 0.1ms;
+}
+
+.home-navbar .active{
+  background-color: var(--richBrown);
+  color: var(--creamyYellow) !important;
+  border-radius: 10px;
+
+}
+
 .nav-link:hover {
   border-bottom: 1px solid #1c140d !important;
   font-weight: 600 !important;
@@ -582,3 +596,6 @@ body {
   background-color: var(--mutedGreen) !important;
   box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
+
+.admin-dashboard .card{
+  background-color:cornsilk;}

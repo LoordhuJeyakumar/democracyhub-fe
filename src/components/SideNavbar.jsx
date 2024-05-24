@@ -176,7 +176,7 @@ function SideNavbar() {
                 </li>
                 <li className="nav-item ">
                   <NavLink
-                    to="/elections"
+                    to="/user/elections"
                     className="nav-link  d-flex justify-content-between"
                   >
                     <span className="sidenav-normal  ms-2  ps-1">

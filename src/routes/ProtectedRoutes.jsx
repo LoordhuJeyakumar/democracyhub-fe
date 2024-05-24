@@ -7,9 +7,7 @@ function ProtectedRoutes({ children }) {
   const isLoggedIn = authUtils.isAuthenticated();
 
   return isLoggedIn ? (
-    <MainWrapper>
-      <Outlet />
-    </MainWrapper>
+    <MainWrapper>{children}</MainWrapper>
   ) : (
     <Navigate to="/login" replace />
   );

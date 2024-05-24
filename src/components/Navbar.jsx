@@ -32,7 +32,7 @@ function Navbar() {
               Login
             </Link>
           </div>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div className="collapse navbar-collapse home-navbar" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item ">
                 <NavLink className="nav-link " aria-current="page" to={"/"}>
@@ -59,7 +59,7 @@ function Navbar() {
               </li>
               <li className="nav-item">
                 <NavLink
-                  to={"localIssues"}
+                  to={"/localIssues"}
                   className="nav-link fw-medium"
                   aria-current="page"
                 >

@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 function SidenavAdmin() {
   const user = useSelector((state) => state.user);
@@ -156,7 +158,7 @@ function SidenavAdmin() {
                 <li className="nav-item ">
                   <NavLink
                     className="nav-link  d-flex justify-content-between"
-                    to="/dashboard"
+                    to="/admin-dashboard"
                   >
                     <span className="sidenav-normal  ms-2  ps-1">
                       Dashboard

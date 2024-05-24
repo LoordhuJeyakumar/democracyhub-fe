@@ -25,13 +25,21 @@ const authUtils = {
 
   isAdmin: function () {
     try {
-      const token = localStorage.getItem("token");
+     
+      const { accessToken: token, isLoggedIn, user, expiresAt } = localStorage;
+      let parsedUser;
+      if (user) {
+        parsedUser = JSON.parse(user);
+      }
       if (!token) {
         return false;
       }
 
-      const decodedToken = jwt.decode(token);
-      return decodedToken.role === "admin";
+      if (isLoggedIn) {
+        return parsedUser.loggedInUser.isAdmin;
+      }
+      return false;
+     
     } catch (error) {
       console.error("Error in isAdmin function: ", error);
       return false;

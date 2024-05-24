@@ -23,7 +23,11 @@ function Redirect() {
   const handleRedirect = () => {
     if (accessToken) {
       setTimeout(() => {
-        navigate("/dashboard");
+        if (userDetails?.loggedInUser?.isAdmin) {
+          navigate("/admin-dashboard");
+        } else {
+          navigate("/dashboard");
+        }
       }, 3000);
     }
   };
@@ -31,7 +35,9 @@ function Redirect() {
     <div className="d-flex flex-column pt-5 align-items-center justify-content-center vh-100">
       <div className="pb-2 mb-5">
         <div className="">
-          <span className="h1">Welcome! {},</span>{" "}
+          <span className="h1">
+            Welcome! {userDetails?.loggedInUser?.name},
+          </span>{" "}
           <span className="h2">Just a moment...</span>
         </div>
 
