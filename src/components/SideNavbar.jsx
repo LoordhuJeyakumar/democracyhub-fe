@@ -190,6 +190,22 @@ function SideNavbar() {
                     ></lord-icon>
                   </NavLink>
                 </li>
+                <li className="nav-item ">
+                  <NavLink
+                    to="/user/localIssues"
+                    className="nav-link  d-flex justify-content-between"
+                  >
+                    <span className="sidenav-normal  ms-2  ps-1">
+                      Local Issues
+                    </span>
+                    <lord-icon
+                      src="https://cdn.lordicon.com/svsiboke.json"
+                      trigger="morph"
+                      state="morph-open"
+                      style={{ width: "30px", height: "30px" }}
+                    ></lord-icon>
+                  </NavLink>
+                </li>
               </ul>
             </div>
           </li>

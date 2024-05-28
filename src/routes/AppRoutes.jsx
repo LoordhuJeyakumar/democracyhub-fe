@@ -23,6 +23,7 @@ import AdminDashboard from "../pages/AdminDashboard";
 import AdminRoutes from "./AdminRoutes";
 import Wrapper from "../components/Wrapper";
 import LocalIssues from "../pages/LocalIssues";
+import LocalIssuesUser from "../pages/LocalIssuesUser";
 
 function AppRoutes() {
   const { user, isLoggedIn } = localStorage;
@@ -114,6 +115,7 @@ function AppRoutes() {
         <Route element={<ProtectedRoutes />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/user/elections" element={<Elections />} />
+          <Route path="/user/localIssues" element={<LocalIssuesUser />} />
         </Route>
 
         <Route

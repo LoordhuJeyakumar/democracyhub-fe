@@ -59,7 +59,7 @@ const localIssuesReducer = (state = initialState, action) => {
     case ACTION_TYPES.ADD_ISSUE:
       return {
         ...state,
-        issues: [...state.issues, action.payload],
+        issues: action.payload,
       };
     case ACTION_TYPES.UPDATE_ISSUE:
       const updatedIssues = state.issues.map((issue) =>

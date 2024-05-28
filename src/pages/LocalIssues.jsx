@@ -45,49 +45,91 @@ function LocalIssues() {
   };
   return (
     <div>
-      <div className="container mt-3 pt-3">
+      <div className="container mt-3 pt-3 local-issue-container">
         <h2>Recent Local Issues</h2>
         <div className="row">
-          {localIssuesState.issues[0]?.map((eachIssue) => {
+          {localIssuesState?.issues?.[0]?.map((eachIssue) => {
             return (
-              <div key={eachIssue._id} className="col-md-6">
-                <div className="card mb-3" style={{ maxWidth: "540px" }}>
-                  <div className="row g-0">
-                    <div className="col-md-4">
-                      {eachIssue.photos.length === 0 ? (
-                        <div
-                          className="img-fluid  rounded-start"
-                          style={{ width: 50 }}
-                        >
-                          <lord-icon
-                            src="https://cdn.lordicon.com/bzqvamqv.json"
-                            trigger="hover"
-                            style={{ width: "200px", height: "200px" }}
-                          ></lord-icon>
+              <>
+                <div key={eachIssue._id} className="col-md-5 mx-auto">
+                  <div className=" content-card ">
+                    <div className="card-big-shadow ">
+                      <div
+                        className="card card-just-text rounded"
+                        data-background="color"
+                        data-color="blue"
+                        data-radius="none"
+                      >
+                        <div className="row g-0">
+                          <div className="col-md-4 ">
+                            {eachIssue?.photos?.length === 0 ? (
+                              <div
+                                className="img-fluid  rounded-start"
+                                style={{ width: 50 }}
+                              >
+                                <lord-icon
+                                  src="https://cdn.lordicon.com/bzqvamqv.json"
+                                  trigger="hover"
+                                  style={{ width: "200px", height: "200px" }}
+                                ></lord-icon>
+                              </div>
+                            ) : (
+                              <img
+                                src={eachIssue.photos[0]}
+                                className="img-fluid rounded-start"
+                                alt="..."
+                              />
+                            )}
+                          </div>
+                          <div className="content col-md-8 ">
+                            <div className=" d-flex justify-content-end align-items-end ">
+                              <h4 className="title p-0 m-0 ">
+                                <a href="#" className="stretched-link">
+                                  {eachIssue.title}
+                                </a>
+                              </h4>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                              <div className="d-flex  flex-column align-items-start justify-content-center">
+                                <small className="text-dark opacity-50">
+                                  Category : &nbsp;
+                                </small>
+                                <h6 className="category badge text-bg-secondary p-1 m-0">
+                                  {eachIssue.category}
+                                </h6>
+                              </div>
+                              <div className="d-flex align-items-center justify-content-center">
+                                <small className="text-dark opacity-50 ">
+                                  Posted by : &nbsp;
+                                </small>
+                                <p
+                                  className="badge text-bg-secondary p-1 m-0"
+                                  /* style="width: 6rem;" */
+                                >
+                                  {eachIssue.createdUserName}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="card-body p-0 m-0">
+                              <div className="pt-0 mt-0 mb-2 d-flex align-items-center justify-content-center"></div>
+                              <p className="description">
+                                {eachIssue.description}
+                              </p>
+                            </div>
+
+                            <div className="card-footr d-flex flex-column">
+                              <small className="text-body-secondary ">
+                                Issue created{" "}
+                                {getTimeElapsed(eachIssue.createdAt)}
+                              </small>
+                            </div>
+                          </div>
                         </div>
-                      ) : (
-                        <img
-                          src={eachIssue.photos[0]}
-                          className="img-fluid rounded-start"
-                          alt="..."
-                        />
-                      )}
-                    </div>
-                    <div className="col-md-8">
-                      <div className="card-body">
-                        <h5 className="card-title">{eachIssue.title}</h5>
-                        <p className="card-text">{eachIssue.description}</p>
-                        <p className="card-text">
-                          <small className="text-body-secondary">
-                            Issue created {getTimeElapsed(eachIssue.createdAt)}
-                          </small>
-                        </p>
-                        
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </>
             );
           })}
         </div>
