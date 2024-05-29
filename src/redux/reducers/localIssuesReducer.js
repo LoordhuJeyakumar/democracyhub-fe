@@ -24,14 +24,14 @@ const localIssuesactionCreators = {
     payload: issueId,
   }),
 
-  upvoteIssue: (issueId) => ({
+  upvoteIssue: (issueId, userId) => ({
     type: ACTION_TYPES.UPVOTE_ISSUE,
-    payload: issueId,
+    payload: { issueId, userId },
   }),
 
-  downvoteIssue: (issueId) => ({
+  downvoteIssue: (issueId, userId) => ({
     type: ACTION_TYPES.DOWNVOTE_ISSUE,
-    payload: issueId,
+    payload: { issueId, userId },
   }),
 
   setLoading: (isLoading) => ({
@@ -50,6 +50,7 @@ export { ACTION_TYPES, localIssuesactionCreators };
 // Reducer remains the same
 const initialState = {
   issues: [],
+
   loading: false,
   error: null,
 };
@@ -79,18 +80,27 @@ const localIssuesReducer = (state = initialState, action) => {
       };
     case ACTION_TYPES.UPVOTE_ISSUE:
       const upvotedIssues = state.issues.map((issue) =>
-        issue.id === action.payload
-          ? { ...issue, upvotes: issue.upvotes + 1 }
+        issue.id === action.payload.issueId
+          ? {
+              ...issue,
+              upvotes: issue.upvotes + 1,
+              upvotedBy: [...issue.upvotedBy, action.payload.userId],
+            }
           : issue
       );
       return {
         ...state,
         issues: upvotedIssues,
       };
+
     case ACTION_TYPES.DOWNVOTE_ISSUE:
       const downvotedIssues = state.issues.map((issue) =>
-        issue.id === action.payload
-          ? { ...issue, downvotes: issue.downvotes + 1 }
+        issue.id === action.payload.issueId
+          ? {
+              ...issue,
+              downvotes: issue.downvotes + 1,
+              downvotedBy: [...issue.downvotedBy, action.payload.userId],
+            }
           : issue
       );
       return {

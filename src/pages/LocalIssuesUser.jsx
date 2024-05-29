@@ -4,12 +4,14 @@ import localIssuesService from "../services/localIssuesService";
 import { localIssuesactionCreators } from "../redux/reducers/localIssuesReducer";
 import moment from "moment";
 import IssueCard from "./IssueCard";
+import LoadingBox from "../components/LoadingBox";
 
 function LocalIssuesUser() {
   const issues = useSelector((state) => state.localIssues);
   const dispatch = useDispatch();
   const [selectedIssue, setSelectedIssue] = useState(null); // State for selected issue
   const [isActive, setIsActive] = useState(false);
+  
 
   useEffect(() => {
     fetchLocalIssues();
@@ -18,7 +20,7 @@ function LocalIssuesUser() {
   const fetchLocalIssues = async () => {
     try {
       let res = await localIssuesService.getAllIssuesDetails();
-      console.log(res);
+
       if (res.status === 200) {
         dispatch(localIssuesactionCreators.addIssue(res.data.allIssues));
         dispatch(localIssuesactionCreators.setLoading(true));
@@ -28,7 +30,6 @@ function LocalIssuesUser() {
     }
   };
 
-  console.log(issues);
   return (
     <div
       className="container-fluid my-3 py-3"
@@ -82,7 +83,7 @@ function LocalIssuesUser() {
               </div>
             ))
           ) : (
-            <div className="loader"></div>
+            <LoadingBox />
           )}
         </div>
         <div className="col-lg-9">

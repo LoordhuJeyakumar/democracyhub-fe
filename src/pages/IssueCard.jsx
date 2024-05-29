@@ -1,40 +1,71 @@
 // src/components/IssueCard.js
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import { localIssuesactionCreators } from "../redux/reducers/localIssuesReducer";
 import localIssuesService from "../services/localIssuesService";
+import ImageCarousel from "../components/ImageCarousel";
 
 const IssueCard = ({ selectedIssue }) => {
+  const upvoteBtn = useRef(null);
+  const downvoteBtn = useRef(null);
+
+  let { user } = localStorage;
+  user = JSON.parse(user);
+
+  useEffect(() => {
+    fetchIssue();
+    console.log("down", selectedIssue.downvotedBy.includes(user.id));
+    if (downvoteBtn) {
+      if (selectedIssue.downvotedBy.includes(user.id)) {
+        downvoteBtn?.current?.focus();
+        console.log("yes from down");
+      }
+    }
+    console.log("up", selectedIssue.upvotedBy.includes(user.id));
+    if (upvoteBtn) {
+      if (selectedIssue.upvotedBy.includes(user.id)) {
+        console.log("yes from up");
+        upvoteBtn?.current?.focus();
+      }
+    }
+  }, [selectedIssue]);
+
   const dispatch = useDispatch();
   const [commentText, setCommentText] = useState("");
-  // State variable to track the user's vote
-  const [userVote, setUserVote] = useState(null);
+
+  const fetchIssue = async () => {
+    try {
+      let res = await localIssuesService.getIssueById(selectedIssue._id);
+
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   // Function to handle upvotes
   const handleUpvote = async () => {
-    if (userVote !== "upvote") {
-      try {
-        const res = await localIssuesService.upVoteIssue(selectedIssue._id);
-        console.log(res.data);
-        setUserVote("upvote");
-      } catch (error) {
-        console.error(error);
-      }
+    try {
+      const res = await localIssuesService.upVoteIssue(selectedIssue._id);
+      console.log(res.data);
+      dispatch(localIssuesactionCreators.upvoteIssue(selectedIssue._id));
+      fetchIssue();
+    } catch (error) {
+      console.error(error);
     }
   };
 
   // Function to handle downvotes
   const handleDownvote = async () => {
-    if (userVote !== "downvote") {
-      try {
-        const res = await localIssuesService.downVoteIssue(selectedIssue._id);
-        console.log(res.data);
-        setUserVote("upvote");
-      } catch (error) {
-        console.error(error);
-      }
+    try {
+      const res = await localIssuesService.downVoteIssue(selectedIssue._id);
+      console.log(res.data);
+      dispatch(localIssuesactionCreators.downvoteIssue(selectedIssue._id));
+      fetchIssue();
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -77,16 +108,47 @@ const IssueCard = ({ selectedIssue }) => {
               <span>Posted {moment(selectedIssue.createdAt).fromNow()}</span>
             </div>
           </div>
+          <div className="upvote-downvote-box">
+            <button
+              className={`btn ${
+                selectedIssue.upvotedBy.includes(user.id)
+                  ? "btn-upvote-active"
+                  : "btn-upvote"
+              }`}
+              onClick={handleUpvote}
+              ref={upvoteBtn}
+            >
+              <i className="fas fa-thumbs-up"></i>
+              <span className="upvote-count">{selectedIssue.upvotes}</span>
+            </button>
+            <button
+              className={`btn ${
+                selectedIssue.downvotedBy.includes(user.id)
+                  ? "btn-downvote-active"
+                  : "btn-downvote"
+              }`}
+              onClick={handleDownvote}
+              ref={downvoteBtn}
+            >
+              <i className="fas fa-thumbs-down"></i>
+              <span className="downvote-count">{selectedIssue.downvotes}</span>
+            </button>
+          </div>
         </div>
         <div className="card-body">
           <p>{selectedIssue.description}</p>
-          <div>
-            <lord-icon
-              src="https://cdn.lordicon.com/bzqvamqv.json"
-              trigger="hover"
-              style={{ width: "200px", height: "200px" }}
-            ></lord-icon>
-          </div>
+          {selectedIssue.photos.length != 0 ? (
+            <ImageCarousel images={selectedIssue.photos} />
+          ) : (
+            <div className="d-flex justify-content-center">
+              <lord-icon
+                src="https://cdn.lordicon.com/bzqvamqv.json"
+                trigger="hover"
+                className="p-0 m-0"
+                style={{ width: 200, height: 200 }}
+              ></lord-icon>
+            </div>
+          )}
 
           {/* <div className="upvote-downvote-box">
             <div className="radio_group">
@@ -104,20 +166,6 @@ const IssueCard = ({ selectedIssue }) => {
               </label>
             </div>
           </div> */}
-          <div className="upvote-downvote-box">
-            <button
-              className="btn btn-upvote"
-              onClick={handleUpvote}
-              disabled={userVote === "upvote"}
-            >
-              <i className="fas fa-thumbs-up"></i>
-              <span className="upvote-count">{selectedIssue.upvotes}</span>
-            </button>
-            <button className="btn btn-downvote" onClick={handleDownvote} disabled={userVote === "downvote"}>
-              <i className="fas fa-thumbs-down"></i>
-              <span className="downvote-count">{selectedIssue.downvotes}</span>
-            </button>
-          </div>
         </div>
         <div className="comment-bottom  p-2 px-4">
           <div className="d-flex flex-row add-comment-section mt-4 mb-4">
@@ -145,12 +193,7 @@ const IssueCard = ({ selectedIssue }) => {
               <span className="mb-1 ml-2">4 hours ago</span>
             </div>
             <div className="comment-text-sm">
-              <span>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </span>
+              <span>Lorem ipsum dolor sit amet, consectetur</span>
             </div>
             <div className="reply-section">
               <div className="d-flex flex-row align-items-center voting-icons">

@@ -13,12 +13,22 @@ const localIssuesService = {
       return error;
     }
   },
+  getIssueById: async (localIssueId) => {
+    try {
+      const response = await instance.protectedInstance.get(
+        `${API_URL_ENDPOINT}${localIssueId}`
+      );
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  },
   upVoteIssue: async (localIssueId) => {
     try {
       const response = await instance.protectedInstance.put(
         `${API_URL_ENDPOINT}upVote/${localIssueId}`
       );
-
+      
       return response;
     } catch (error) {
       console.error(error);

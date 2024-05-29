@@ -706,7 +706,7 @@
 }
 /* HTML: <div class="loader"></div> */
 .loader {
-  width: 16px;
+
   aspect-ratio: 1;
   background: #3fb8af;
   position: relative;
@@ -1026,11 +1026,7 @@ a:focus {
   line-height: 3px;
 }
 
-.comments {
-  text-decoration: underline;
-  text-underline-position: under;
-  cursor: pointer;
-}
+
 
 .dot {
   height: 7px;
@@ -1041,13 +1037,7 @@ a:focus {
   display: inline-block;
 }
 
-.hit-voting:hover {
-  color: blue;
-}
 
-.hit-voting {
-  cursor: pointer;
-}
 
 .fa-thumbs-up,
 .fa-thumbs-down {
@@ -1062,11 +1052,12 @@ a:focus {
   cursor: pointer;
 }
 .upvote-count {
-  font-size: 1.5rem;
+  font-size: 1rem;
   padding-left: 0.3rem;
 }
 .downvote-count {
-  font-size: 1.5rem;
+  font-size: 1rem;
+  padding-left: 0.3rem;
 }
 
 .upvote-downvote-box {
@@ -1075,53 +1066,21 @@ a:focus {
   justify-content: space-evenly;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
-.radio_group {
-  width: 50px;
-  height: 50px;
-  margin: 5px;
-  position: relative;
-  text-align: center;
-  line-height: 50px;
-  font-size: 40px;
-}
-.radio_group input[type="radio"] {
-  opacity: 0;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  margin: 0;
-  padding: 0;
-  z-index: 1;
-  cursor: pointer;
-}
-.radio_group input[type="radio"] + label {
-  color: #95a5a6;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  transform: scale(0.8);
-}
-.radio_group input[type="radio"]:checked + label > .fa-thumbs-up,
-.radio_group input[type="radio"]:checked + label > .upvote-count {
-  color: #3ecd5e;
-  transform: scale(1.1);
-}
-
-.radio_group input[type="radio"]:checked + label > .fa-thumbs-down,.radio_group input[type="radio"]:checked + label > .downvote-count {
-  color: red;
-  transform: scale(1.1);
-}
 
 
 
 .btn-downvote:hover, .btn-downvote:active, .btn-downvote:focus{
-  color: red;
+  color: red !important;
 }
 
 .btn-upvote:hover, .btn-upvote:active, .btn-upvote:focus{
-  color:#3ecd5e;
+  color:#3ecd5e !important;
+}
+
+.btn-downvote-active {
+  color: red !important;
+}
+
+.btn-upvote-active {
+  color:#3ecd5e !important;
 }

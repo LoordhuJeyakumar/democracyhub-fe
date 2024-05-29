@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import localIssuesService from "../services/localIssuesService";
 import { localIssuesactionCreators } from "../redux/reducers/localIssuesReducer";
 import moment from "moment";
+import LoadingBox from "../components/LoadingBox";
+import { toast } from "react-toastify";
 
 function LocalIssues() {
   const localIssuesState = useSelector((state) => state.localIssues);
-  console.log(localIssuesState.issues);
+
   const dispatch = useDispatch();
 
   const getTimeElapsed = (createdAt) => {
@@ -37,20 +39,25 @@ function LocalIssues() {
   const fetchLocalIssues = async () => {
     try {
       let res = await localIssuesService.getAllIssuesDetails();
-      console.log(res);
+
       if (res.status === 200) {
         dispatch(localIssuesactionCreators.addIssue(res.data.allIssues));
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+      if (error.code === "ERR_NETWORK") {
+        toast.error(error.message);
+      }
+    }
   };
   return (
     <div>
       <div className="container mt-3 pt-3 local-issue-container">
-        <h2>Recent Local Issues</h2>
-        <div className="row">
-          {localIssuesState?.issues?.[0]?.map((eachIssue) => {
-            return (
-              <>
+        <h2 className="text-center">Recent Local Issues</h2>
+        {localIssuesState.issues.length != 0 ? (
+          <div className="row">
+            {localIssuesState?.issues?.map((eachIssue) => {
+              return (
                 <div key={eachIssue._id} className="col-md-5 mx-auto">
                   <div className=" content-card ">
                     <div className="card-big-shadow ">
@@ -129,10 +136,12 @@ function LocalIssues() {
                     </div>
                   </div>
                 </div>
-              </>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        ) : (
+          <LoadingBox width={40} />
+        )}
       </div>
     </div>
   );
