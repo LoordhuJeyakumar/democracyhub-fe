@@ -6,8 +6,9 @@ import { useDispatch } from "react-redux";
 import { localIssuesactionCreators } from "../redux/reducers/localIssuesReducer";
 import localIssuesService from "../services/localIssuesService";
 import ImageCarousel from "../components/ImageCarousel";
+import VoteComponent from "../components/VoteComponent";
 
-const IssueCard = ({ selectedIssue }) => {
+const IssueCard = ({ selectedIssue, setSelectedIssue }) => {
   const upvoteBtn = useRef(null);
   const downvoteBtn = useRef(null);
 
@@ -16,17 +17,15 @@ const IssueCard = ({ selectedIssue }) => {
 
   useEffect(() => {
     fetchIssue();
-    console.log("down", selectedIssue.downvotedBy.includes(user.id));
+
     if (downvoteBtn) {
       if (selectedIssue.downvotedBy.includes(user.id)) {
         downvoteBtn?.current?.focus();
-        console.log("yes from down");
       }
     }
-    console.log("up", selectedIssue.upvotedBy.includes(user.id));
+
     if (upvoteBtn) {
       if (selectedIssue.upvotedBy.includes(user.id)) {
-        console.log("yes from up");
         upvoteBtn?.current?.focus();
       }
     }
@@ -38,32 +37,14 @@ const IssueCard = ({ selectedIssue }) => {
   const fetchIssue = async () => {
     try {
       let res = await localIssuesService.getIssueById(selectedIssue._id);
-
-      console.log(res);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // Function to handle upvotes
-  const handleUpvote = async () => {
-    try {
-      const res = await localIssuesService.upVoteIssue(selectedIssue._id);
-      console.log(res.data);
-      dispatch(localIssuesactionCreators.upvoteIssue(selectedIssue._id));
-      fetchIssue();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // Function to handle downvotes
-  const handleDownvote = async () => {
-    try {
-      const res = await localIssuesService.downVoteIssue(selectedIssue._id);
-      console.log(res.data);
-      dispatch(localIssuesactionCreators.downvoteIssue(selectedIssue._id));
-      fetchIssue();
+      if (res.status == 200) {
+        dispatch(
+          localIssuesactionCreators.updateIssue(
+            res.data.existIssue._id,
+            res.data.existIssue
+          )
+        );
+      }
     } catch (error) {
       console.error(error);
     }
@@ -108,7 +89,7 @@ const IssueCard = ({ selectedIssue }) => {
               <span>Posted {moment(selectedIssue.createdAt).fromNow()}</span>
             </div>
           </div>
-          <div className="upvote-downvote-box">
+          {/* <div className="upvote-downvote-box">
             <button
               className={`btn ${
                 selectedIssue.upvotedBy.includes(user.id)
@@ -133,7 +114,16 @@ const IssueCard = ({ selectedIssue }) => {
               <i className="fas fa-thumbs-down"></i>
               <span className="downvote-count">{selectedIssue.downvotes}</span>
             </button>
-          </div>
+          </div> */}
+          <VoteComponent
+            issueId={selectedIssue._id}
+            upvotes={selectedIssue.upvotes}
+            downvotes={selectedIssue.downvotes}
+            upvotedBy={selectedIssue.upvotedBy}
+            downvotedBy={selectedIssue.downvotedBy}
+            setSelectedIssue={setSelectedIssue}
+            selectedIssue={selectedIssue}
+          />
         </div>
         <div className="card-body">
           <p>{selectedIssue.description}</p>

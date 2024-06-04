@@ -7,7 +7,7 @@ function Redirect() {
   const dispatch = useDispatch();
   const { accessToken, user } = localStorage;
   const userDetails = JSON.parse(user);
-  console.log(userDetails);
+
   useEffect(() => {
     handleRedirect();
     setUserDetails();
@@ -38,7 +38,7 @@ function Redirect() {
           <span className="h1">
             Welcome! {userDetails?.loggedInUser?.name},
           </span>{" "}
-          <span className="h2">Just a moment...</span>
+          <h2 className="h2">Just a moment...</h2>
         </div>
 
         <p className="">

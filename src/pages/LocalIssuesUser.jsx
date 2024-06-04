@@ -89,7 +89,10 @@ function LocalIssuesUser() {
         <div className="col-lg-9">
           {selectedIssue ? (
             <>
-              <IssueCard selectedIssue={selectedIssue} />
+              <IssueCard
+                selectedIssue={selectedIssue}
+                setSelectedIssue={setSelectedIssue}
+              />
             </>
           ) : (
             <div>Please select an issue to view details.</div>

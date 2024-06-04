@@ -5,6 +5,10 @@ import { Flip, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-toastify/dist/ReactToastify.min.css";
 import "./components/root.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the grid
+import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the grid
+import "./components/ag-grid-theme-builder.css"
 
 function App() {
   return (

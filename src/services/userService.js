@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import instance from "./instance";
 
+
 const userService = {
   register: async (userData) => {
     try {
@@ -115,6 +116,87 @@ const userService = {
       return error;
     }
   },
+  getAllusers: async (page = 1, limit = 10) => {
+    try {
+      /* const response = await instance.protectedInstance(
+        `users?page=${page}&limit=${limit}`
+      ); */
+      const response = await instance.protectedInstance(`users`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
+  },
+  deleteUserByAdmin: async (userId) => {
+    try {
+      const response = await instance.protectedInstance.delete(
+        `/users/${userId}`
+      );
+      return response;
+    } catch (error) {
+      console.error("Error from userService", error);
+      return error;
+    }
+  },
+  deleteUserByUser: async (userId) => {
+    try {
+      const response = await instance.protectedInstance.delete(
+        `/users/delete/${userId}`
+      );
+      return response;
+    } catch (error) {
+      console.error("Error from userService", error);
+      return error;
+    }
+  },
+  deActivateUserByAdmin: async (userId) => {
+    try {
+      const response = await instance.protectedInstance.put(
+        `/users/deactivate/${userId}`
+      );
+      return response;
+    } catch (error) {
+      console.error("Error from userService", error);
+      return error;
+    }
+  },
+  deActivateUserByUser: async (userId) => {
+    try {
+      const response = await instance.protectedInstance.put(
+        `/users/deactivate/user/${userId}`
+      );
+      return response;
+    } catch (error) {
+      console.error("Error from userService", error);
+      return error;
+    }
+  },
+  activateUserByAdmin: async (userId) => {
+    try {
+      const response = await instance.protectedInstance.put(
+        `/users/activate/${userId}`
+      );
+      return response;
+    } catch (error) {
+      console.error("Error from userService", error);
+      return error;
+    }
+  },
+  changePassword: async (userId, changePasswordObj) => {
+    try {
+      const response = await instance.protectedInstance.post(
+        `/users/changePassword/${userId}`,
+        changePasswordObj
+      );
+      return response;
+    } catch (error) {
+      console.error("Internal Error from userService", error);
+      return error;
+    }
+  },
 };
+
+
 
 export default userService;

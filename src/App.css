@@ -32,7 +32,7 @@
   font-family: "Poppins", sans-serif;
   box-sizing: border-box;
 }
-#root,
+#root, body,
 #root > div,
 .card-list {
   background-color: var(--creamyWhite) !important;
@@ -659,6 +659,14 @@
   background-color: cornsilk;
 }
 
+.admin-dashboard a{
+  font-size: .9rem;
+  text-decoration: none;
+}
+.admin-dashboard a:hover{
+  color:#3ecd5e;
+}
+
 /* 
   ************************* */
 
@@ -1083,4 +1091,50 @@ a:focus {
 
 .btn-upvote-active {
   color:#3ecd5e !important;
+}
+
+.grid-container{
+  width: 100%;
+  height: 100%;
+
+}
+.navbar-vertical .navbar-nav>.main-menu>.nav-link.active {
+  border-right-width: 0;
+  border-bottom-width: 0;
+  background-color: var(--creamyYellow);
+  color: var(--richBrown) !important;
+}
+
+.custom-pagination-panel {
+  color: var(--creamyWhite);
+  background-color: var(--richBrown);
+  display: flex;
+  justify-content: end;
+  border-radius: .5rem;
+}
+
+.custom-page-size-selector .form-select{
+  background-color: var(--richBrown) !important;
+  color: var(--creamyWhite) !important;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23d35400 '><polygon points='0,0 100,0 50,50'/></svg>")
+    no-repeat;
+    background-size: 16px;
+  background-position: calc(100% - 5px) 17px;
+  background-repeat: no-repeat;
+  border-color: #3c3c3c;
+}
+
+.status-icon {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.status-active {
+  background-color: green;
+}
+
+.status-deactivated {
+  background-color: red;
 }

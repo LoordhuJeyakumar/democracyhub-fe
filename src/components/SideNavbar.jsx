@@ -75,7 +75,7 @@ function SideNavbar() {
         id="sidenav-collapse-main"
       >
         <ul className="navbar-nav">
-          <li className="nav-item mb-2 mt-0 ">
+          <li className="nav-item mb-2 mt-0 main-menu">
             <a
               data-bs-toggle="collapse"
               href="#ProfileNav"
@@ -86,7 +86,7 @@ function SideNavbar() {
             >
               <span className="material-symbols-outlined">account_circle</span>
               <span className="nav-link-text ms-2 ps-1 text-capitalize">
-                {user?.details?.name}
+                {userParsed?.name}
               </span>
             </a>
             <div
@@ -141,7 +141,7 @@ function SideNavbar() {
           </li>
           <hr className="horizontal light mt-0" />
 
-          <li className="nav-item">
+          <li className="nav-item main-menu">
             <a
               data-bs-toggle="collapse"
               href="#dashboardsExamples"

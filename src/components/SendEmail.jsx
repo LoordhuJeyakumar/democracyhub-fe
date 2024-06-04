@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import userService from "../services/userService";
+import { toast } from "react-toastify";
 
 function SendEmail({ type }) {
   console.log(type);
@@ -25,25 +26,25 @@ function SendEmail({ type }) {
         toast.info(res?.response?.data?.message);
         setIsSubmit(false);
         setEmail("");
-        forgotpasswordREf.current.classList.remove("was-validated");
+        getLinkFormRef.current.classList.remove("was-validated");
       }
       if (res?.response?.status === 403) {
         toast.info(res?.response?.data?.message);
         setIsSubmit(false);
         setEmail("");
-        forgotpasswordREf.current.classList.remove("was-validated");
+        getLinkFormRef.current.classList.remove("was-validated");
       }
       if (res?.message === "Network Error") {
         toast.error(res.message);
         setIsSubmit(false);
         setEmail("");
-        forgotpasswordREf.current.classList.remove("was-validated");
+        getLinkFormRef.current.classList.remove("was-validated");
       }
       if (res?.status === 200) {
         toast.success(res?.data?.message);
         setIsSubmit(false);
         setEmail("");
-        forgotpasswordREf.current.classList.remove("was-validated");
+        getLinkFormRef.current.classList.remove("was-validated");
         setTimeout(() => {
           navigate("/login");
         }, 5000);
@@ -68,25 +69,25 @@ function SendEmail({ type }) {
         toast.info(res?.response?.data?.message);
         setIsSubmit(false);
         setEmail("");
-        forgotpasswordREf.current.classList.remove("was-validated");
+        getLinkFormRef.current.classList.remove("was-validated");
       }
       if (res?.response?.status === 403) {
         toast.info(res?.response?.data?.message);
         setIsSubmit(false);
         setEmail("");
-        forgotpasswordREf.current.classList.remove("was-validated");
+        getLinkFormRef.current.classList.remove("was-validated");
       }
       if (res?.message === "Network Error") {
         toast.error(res.message);
         setIsSubmit(false);
         setEmail("");
-        forgotpasswordREf.current.classList.remove("was-validated");
+        getLinkFormRef.current.classList.remove("was-validated");
       }
       if (res?.status === 200) {
         toast.success(res?.data?.message);
         setIsSubmit(false);
         setEmail("");
-        forgotpasswordREf.current.classList.remove("was-validated");
+        getLinkFormRef.current.classList.remove("was-validated");
         setTimeout(() => {
           navigate("/login");
         }, 5000);

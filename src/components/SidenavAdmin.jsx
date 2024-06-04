@@ -4,18 +4,31 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 function SidenavAdmin() {
   const user = useSelector((state) => state.user);
-
+  const [activeTab, setActiveTab] = useState("");
   const location = useLocation();
   const userParsed = JSON.parse(localStorage.getItem("user"));
+
   const [profileTabActive, setProfileTabActive] = useState(false);
   const [dashboardTabActive, setDashboardTabActive] = useState(false);
-  const [electionsTabActive, setElectionsTabActive] = useState(false);
+  const handleTabOpen = (tabName) => {
+    setActiveTab(tabName);
+  };
+  const tabPaths = {
+    profile: ["/profile", "/profileSettings"],
+    dashboard: ["/dashboard", "/admin-dashboard"],
+    users: ["/viewAllUsers"],
+    elections: ["/admin/elections", "/createElection"],
+    // ... other paths
+  };
 
-  const [navTabOpen, setNavTabOpen] = useState({
-    profile: false,
-    dashboard: false,
-    election: false,
-  });
+  useEffect(() => {
+    for (const [tabName, paths] of Object.entries(tabPaths)) {
+      if (paths.includes(location.pathname)) {
+        handleTabOpen(tabName);
+        break;
+      }
+    }
+  }, [location.pathname]);
 
   const navigate = useNavigate();
   const handleSignOut = async () => {
@@ -35,7 +48,6 @@ function SidenavAdmin() {
       handleDashboardTabOpen();
     }
   }, [location.pathname]);
-  useEffect(() => {}, []);
 
   const handleProfileTabOpen = () => {
     setProfileTabActive(true);
@@ -58,21 +70,23 @@ function SidenavAdmin() {
     >
       <div className="sidenav-header">
         <div className="p-1 m-1">
-          <div className="logoBox d-flex flex-column  justify-content-center align-items-center">
-            <h1 className="logoName text-center fs-3 fw-bold ">DemocracyHUB</h1>
-            <small className="mt-0 pt-0  tagline">
+          <div className="logoBox d-flex flex-column p-3 justify-content-center align-items-center">
+            <h1 className="logoName text-center fs-4  fw-bold ">
+              DemocracyHUB
+            </h1>
+            <small className="mt-0 pt-0  tagline" style={{ fontSize: 12 }}>
               Empowering citizens to make informed decisions
             </small>
           </div>
         </div>
       </div>
-      <hr className="horizontal light mt-0 mb-2" />
+      <hr className="horizontal light" />
       <div
         className="collapse navbar-collapse w-auto h-auto "
         id="sidenav-collapse-main"
       >
         <ul className="navbar-nav">
-          <li className="nav-item mb-2 mt-0 ">
+          <li className="nav-item mb-2 mt-0 main-menu">
             <a
               data-bs-toggle="collapse"
               href="#ProfileNav"
@@ -83,11 +97,11 @@ function SidenavAdmin() {
             >
               <span className="material-symbols-outlined">account_circle</span>
               <span className="nav-link-text ms-2 ps-1 text-capitalize">
-                {user?.details?.name}
+                {userParsed?.name}
               </span>
             </a>
             <div
-              className={profileTabActive ? "collapse show" : "collapse"}
+              className={activeTab === "profile" ? "collapse show" : "collapse"}
               id="ProfileNav"
             >
               <ul className="nav ">
@@ -95,7 +109,7 @@ function SidenavAdmin() {
                   <NavLink
                     className="nav-link "
                     to={"/profile"}
-                    onClick={handleProfileTabOpen}
+                    onClick={() => handleTabOpen("profile")}
                   >
                     <span className="material-symbols-outlined sidenav-mini-icon">
                       badge
@@ -110,7 +124,7 @@ function SidenavAdmin() {
                   <NavLink
                     className="nav-link  "
                     to={"/profileSettings"}
-                    onClick={handleProfileTabOpen}
+                    onClick={() => handleTabOpen("profileSettings")}
                   >
                     <span className="material-symbols-outlined sidenav-mini-icon">
                       manage_accounts
@@ -138,10 +152,10 @@ function SidenavAdmin() {
           </li>
           <hr className="horizontal light mt-0" />
 
-          <li className="nav-item">
+          <li className="nav-item main-menu">
             <a
               data-bs-toggle="collapse"
-              href="#dashboardsExamples"
+              href="#dashboards"
               className="nav-link  active"
               aria-controls="dashboardsExamples"
               role="button"
@@ -151,14 +165,19 @@ function SidenavAdmin() {
               <span className="nav-link-text ms-2 ps-1">Menu</span>
             </a>
             <div
-              className={dashboardTabActive ? "collapse show" : "collapse"}
-              id="dashboardsExamples"
+              className={
+                ["dashboard", "users", "elections"].includes(activeTab)
+                  ? "collapse show"
+                  : "collapse"
+              }
+              id="dashboards"
             >
               <ul className="nav ">
                 <li className="nav-item ">
                   <NavLink
                     className="nav-link  d-flex justify-content-between"
                     to="/admin-dashboard"
+                    onClick={() => handleTabOpen("dashboard")}
                   >
                     <span className="sidenav-normal  ms-2  ps-1">
                       Dashboard
@@ -171,21 +190,119 @@ function SidenavAdmin() {
                     ></lord-icon>
                   </NavLink>
                 </li>
-                <li className="nav-item ">
-                  <NavLink
-                    to="/elections"
-                    className="nav-link  d-flex justify-content-between"
+                <li className="nav-item sub-menu-head">
+                  <a
+                    data-bs-toggle="collapse"
+                    href="#users"
+                    className="nav-link  sub-menu-link  "
+                    aria-controls="users"
+                    role="button"
+                    aria-expanded="false"
                   >
-                    <span className="sidenav-normal  ms-2  ps-1">
-                      Elections
-                    </span>
-                    <lord-icon
-                      src="https://cdn.lordicon.com/svsiboke.json"
-                      trigger="morph"
-                      state="morph-open"
-                      style={{ width: "30px", height: "30px" }}
-                    ></lord-icon>
-                  </NavLink>
+                    <div className="d-flex justify-content-start align-items-center w-100">
+                      <lord-icon
+                        src="https://cdn.lordicon.com/fmasbomy.json"
+                        trigger="in"
+                        delay="1000"
+                        state="morph-group"
+                        colors="primary:#121331,secondary:#acd0c0,tertiary:#f3ffbd"
+                        style={{ width: "30px", height: "30px" }}
+                      ></lord-icon>
+                      <span className="nav-link-text ms-2 ps-1 ">Users</span>
+                    </div>
+                  </a>
+                  <div
+                    className={
+                      activeTab === "users" ? "collapse show" : "collapse"
+                    }
+                    id="users"
+                  >
+                    <ul className="nav ">
+                      <li className="nav-item ">
+                        <NavLink
+                          className="nav-link  d-flex justify-content-between"
+                          to="/viewAllUsers"
+                          onClick={() => handleTabOpen("users")}
+                        >
+                          <span className="sidenav-normal  ms-2  ps-1">
+                            View All Users
+                          </span>
+                          <lord-icon
+                            src="https://cdn.lordicon.com/epietrpn.json"
+                            trigger="morph"
+                            state="morph-mantion"
+                            style={{ width: "30px", height: "30px" }}
+                          ></lord-icon>
+                        </NavLink>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li className="nav-item sub-menu-head">
+                  <a
+                    data-bs-toggle="collapse"
+                    href="#elections"
+                    className="nav-link  sub-menu-link  "
+                    aria-controls="elections"
+                    role="button"
+                    aria-expanded="false"
+                  >
+                    <div className="d-flex justify-content-start align-items-center w-100">
+                      <lord-icon
+                        src="https://cdn.lordicon.com/fmasbomy.json"
+                        trigger="in"
+                        delay="1000"
+                        state="morph-group"
+                        colors="primary:#121331,secondary:#acd0c0,tertiary:#f3ffbd"
+                        style={{ width: "30px", height: "30px" }}
+                      ></lord-icon>
+                      <span className="nav-link-text ms-2 ps-1 ">
+                        Elections
+                      </span>
+                    </div>
+                  </a>
+                  <div
+                    className={
+                      activeTab === "elections" ? "collapse show" : "collapse"
+                    }
+                    id="elections"
+                  >
+                    <ul className="nav ">
+                      <li className="nav-item ">
+                        <NavLink
+                          className="nav-link  d-flex justify-content-between"
+                          to="/createElection"
+                          onClick={() => handleTabOpen("elections")}
+                        >
+                          <span className="sidenav-normal  ms-2  ps-1">
+                            Create Election
+                          </span>
+                          <lord-icon
+                            src="https://cdn.lordicon.com/epietrpn.json"
+                            trigger="morph"
+                            state="morph-mantion"
+                            style={{ width: "30px", height: "30px" }}
+                          ></lord-icon>
+                        </NavLink>
+                      </li>
+                      <li className="nav-item ">
+                        <NavLink
+                          to="/elections"
+                          className="nav-link  d-flex justify-content-between"
+                        >
+                          <span className="sidenav-normal  ms-2  ps-1">
+                            Elections
+                          </span>
+                          <lord-icon
+                            src="https://cdn.lordicon.com/svsiboke.json"
+                            trigger="morph"
+                            state="morph-open"
+                            style={{ width: "30px", height: "30px" }}
+                          ></lord-icon>
+                        </NavLink>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
               </ul>
             </div>

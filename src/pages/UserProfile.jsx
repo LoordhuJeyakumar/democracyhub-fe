@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function UserProfile() {
   const user = useSelector((state) => state.user);
   let userDetails = user.details;
-  console.log(userDetails);
+
   return (
     <div className="vh-100">
       <div className="card card-body mx-3 mx-md-4 mt-5 user-details-card">

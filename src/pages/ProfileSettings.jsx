@@ -32,7 +32,7 @@ function ProfileSettings() {
 
   const getUser = async () => {
     const res = await userService.getUserDetails(userParsed.id);
-    console.log(res);
+
     if (res?.code === "ERR_NETWORK") {
       toast.error(res.message);
       return;
@@ -129,7 +129,7 @@ function ProfileSettings() {
     basicInfoFormRef.current.classList.add("was-validated");
     if (basicInfoFormRef.current.checkValidity()) {
       const res = await userService.updateUserDetails(id, updateObj);
-      console.log(res);
+
       if (res.status === 200) {
         toast.success("User details are updated successfuly!");
         dispatch({
@@ -154,11 +154,11 @@ function ProfileSettings() {
     }
     changePasswordFormRef.current.classList.add("was-validated");
     if (changePasswordFormRef.current.checkValidity()) {
-      const res = await authService.changePassword(
+      const res = await userService.changePassword(
         userParsed.id,
         changePassword
       );
-
+      console.log(res);
       if (res.code === "ECONNABORTED") {
         toast.error("timeout of 5000ms exceeded, /n Please try again");
         dispatch({ type: "UNSET_CHANGEPASSWORD" });
@@ -191,10 +191,12 @@ function ProfileSettings() {
       event.preventDefault();
       if (basicInfo?.name && basicInfo?.email) {
         if (userParsed.id) {
-          const res = await authService.deleteAccount(userParsed.id);
+          const res = await userService.deleteUserByUser(userParsed.id);
           if (res.status === 200) {
             if (modalCloseBtnRef) {
               modalCloseBtnRef.current.click();
+              document.body.classList.remove("modal-open");
+              document.querySelector(".modal-backdrop");
             }
             toast.info(res.data.message);
             setIsSubmit(false);
@@ -221,16 +223,19 @@ function ProfileSettings() {
       event.preventDefault();
       if (basicInfo?.name && basicInfo?.email) {
         if (userParsed.id) {
-          const res = await authService.deactivate(userParsed.id);
+          const res = await userService.deActivateUserByUser(userParsed.id);
           if (res.status === 200) {
             if (modalCloseBtnRef) {
+              document.body.classList.remove("modal-open");
+              document.querySelector(".modal-backdrop").remove();
               modalCloseBtnRef.current.click();
-            }
-            toast.info(res.data.message);
-            setIsSubmit(false);
-            sessionStorage.clear();
+              toast.info(res.data.message);
+              setIsSubmit(false);
+              localStorage.clear();
+              sessionStorage.clear();
 
-            navigate("/login");
+              navigate("/login");
+            }
           }
         } else {
           console.error("error userId");
