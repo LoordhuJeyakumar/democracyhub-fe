@@ -1442,10 +1442,10 @@ hr.horizontal.gray-light {
     border-radius: 0!important
 }
 
-.input-group.has-validation>.dropdown-toggle:nth-last-child(n+4),.input-group.has-validation>:nth-last-child(n+3):not(.dropdown-toggle):not(.dropdown-menu),.input-group:not(.has-validation)>.dropdown-toggle:nth-last-child(n+3),.input-group:not(.has-validation)>:not(:last-child):not(.dropdown-toggle):not(.dropdown-menu) {
+/* .input-group.has-validation>.dropdown-toggle:nth-last-child(n+4),.input-group.has-validation>:nth-last-child(n+3):not(.dropdown-toggle):not(.dropdown-menu),.input-group:not(.has-validation)>.dropdown-toggle:nth-last-child(n+3),.input-group:not(.has-validation)>:not(:last-child):not(.dropdown-toggle):not(.dropdown-menu) {
     border-top-right-radius: .375rem!important;
     border-bottom-right-radius: .375rem!important
-}
+} */
 
 .input-group,.input-group .input-group-text {
     transition: .2s ease;
@@ -1547,7 +1547,7 @@ hr.horizontal.gray-light {
     top: -1rem
 }
 
-.input-group.input-group-outline .form-control {
+/* .input-group.input-group-outline .form-control {
     background: none;
     border: 1px solid #d2d6da;
     border-radius: .375rem;
@@ -1555,7 +1555,7 @@ hr.horizontal.gray-light {
     border-bottom-left-radius: .375rem!important;
     padding: .625rem .75rem!important;
     line-height: 1.3!important
-}
+} */
 
 .input-group.input-group-outline .form-control.form-control-lg {
     padding: .75rem!important
@@ -1589,7 +1589,7 @@ hr.horizontal.gray-light {
     flex-grow: 1;
     margin-left: 4px;
     border-right: 1px solid transparent;
-    border-radius: 0 5px
+    /* border-radius: 0 5px */
 }
 
 .input-group.input-group-outline .form-label:after,.input-group.input-group-outline .form-label:before {

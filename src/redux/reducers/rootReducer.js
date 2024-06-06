@@ -4,6 +4,7 @@ import editUserReducer from "./editUserReducer";
 import localIssuesReducer from "./localIssuesReducer";
 import electionReducer from "./electionReducer";
 
+
 const rootReducer = combineReducers({
   user: userReducer,
   editUser: editUserReducer,
