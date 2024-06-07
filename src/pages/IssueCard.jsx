@@ -132,7 +132,9 @@ const IssueCard = ({ eachIssue }) => {
               type="text"
               className="form-control mr-3"
               placeholder="Add comment"
+
             />
+
             <button className="btn btn-primary" type="button">
               Comment
             </button>

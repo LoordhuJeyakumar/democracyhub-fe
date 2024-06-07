@@ -20,7 +20,7 @@ function VoteComponent({ eachIssue, upvotes, downvotes, upvotedBy, downvotedBy }
   const handleUpvote = async () => {
     try {
       const res = await localIssuesService.upVoteIssue(eachIssue._id);
-      console.log(res);
+
       if (res.status === 200) {
 
         if (res.data.message === "Issue Upvoted successfully") {
@@ -42,11 +42,11 @@ function VoteComponent({ eachIssue, upvotes, downvotes, upvotedBy, downvotedBy }
 
   const handleDownvote = async () => {
 
-    console.log(downVotedUser, downvoteCount);
+
 
     try {
       const res = await localIssuesService.downVoteIssue(eachIssue._id);
-      console.log(res);
+
       if (res.status === 200) {
 
         if (res.data.message == "Issue DownVote successfully") {

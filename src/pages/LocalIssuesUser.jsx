@@ -31,12 +31,18 @@ function LocalIssuesUser() {
   };
 
   return (
-    <div
-      className="container-fluid my-3 py-3"
+    <div>
+      <div>
+        <h4 className="text-center mt-4 pb-0 mb-0">Loacal Issues</h4>
+      </div>
+      <div
+        className="container-fluid my-1 py-3"
       style={{ backgroundColor: "#f2e9e1" }}
     >
       <div className="row mt-3 pt-3">
-        <div className="col-lg-3 overflow-scroll vh-100 card-list">
+         
+          <div className="col-lg-3 overflow-scroll vh-100 card-list position-sticky  " style={{ top: 90 }}>
+
           {issues.loading ? (
             issues.issues?.map((eachIssue, index) => (
               <div
@@ -96,6 +102,7 @@ function LocalIssuesUser() {
           )}
         </div>
       </div>
+    </div>
     </div>
   );
 }

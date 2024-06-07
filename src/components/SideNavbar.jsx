@@ -199,9 +199,24 @@ function SideNavbar() {
                       Local Issues
                     </span>
                     <lord-icon
-                      src="https://cdn.lordicon.com/svsiboke.json"
+                      src="https://cdn.lordicon.com/egmlnyku.json"
+                      trigger="hover"
+                      state="hover-conversation-alt"
+                      style={{ width: "30px", height: "30px" }}
+                    ></lord-icon>
+                  </NavLink>
+                </li>
+                <li className="nav-item ">
+                  <NavLink
+                    to="/user/creatNewIssue"
+                    className="nav-link  d-flex justify-content-between"
+                  >
+                    <span className="sidenav-normal  ms-2  ps-1">
+                      Post New Issue
+                    </span>
+                    <lord-icon
+                      src="https://cdn.lordicon.com/vhyuhmbl.json"
                       trigger="morph"
-                      state="morph-open"
                       style={{ width: "30px", height: "30px" }}
                     ></lord-icon>
                   </NavLink>

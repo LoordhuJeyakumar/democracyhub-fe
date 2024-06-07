@@ -26,6 +26,7 @@ import LocalIssues from "../pages/LocalIssues";
 import LocalIssuesUser from "../pages/LocalIssuesUser";
 import ViewAllUsers from "../pages/ViewAllUsers";
 import CreateElection from "../pages/CreateElection";
+import CreateIssue from "../pages/CreateIssue";
 
 function AppRoutes() {
   const { user, isLoggedIn } = localStorage;
@@ -105,6 +106,7 @@ function AppRoutes() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/user/elections" element={<Elections />} />
           <Route path="/user/localIssues" element={<LocalIssuesUser />} />
+          <Route path="/user/creatNewIssue" element={<CreateIssue />} />
         </Route>
 
         <Route
