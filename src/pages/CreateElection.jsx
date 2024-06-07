@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { AgGridReact } from "ag-grid-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Select from "react-select";
 import constituenciesService from "../services/constituenciesService";
 import { addNewElection, createElectionFailure, createElectionRequest, createElectionSuccess, createPhase, createResult, removePhase, removeResult, resetNewElection, setConstituenciesOPtions } from "../redux/actions/electionActions";
@@ -706,7 +706,11 @@ function CreateElection() {
                               required
                               onChange={handleSelectChange}
                               
-                              value={{ value: electionState?.newElection?.electionType, label: electionState?.newElection?.electionType }}
+                              value={
+                                electionState?.newElection?.electionType ?
+                                  {
+                                    value: electionState?.newElection?.electionType, label: electionState?.newElection?.electionType
+                                  } : null}
 
                             />
                             <div className="valid-feedback">Looks good!</div>
@@ -837,7 +841,12 @@ function CreateElection() {
                               ref={constituenciesRef}
 
                             />
-
+                            <div
+                              className="form-text text-secondary"
+                              id="basic-addon4"
+                            >
+                              If you can't find constituency <Link >click here</Link> to add.
+                            </div>
 
                             <div className="valid-feedback">Looks good!</div>
                             <div className="invalid-feedback">
@@ -976,7 +985,7 @@ function CreateElection() {
                               star_rate
                             </span>
                             <div className="checkbox-wrapper-26">
-                              <input type="checkbox" id="_checkbox-26" onChange={handleResultInputChange} name="won" /* value={electionState?.results?.won}  */ />
+                              <input type="checkbox" checked={electionState?.results?.won} id="_checkbox-26" onChange={handleResultInputChange} name="won" /* value={electionState?.results?.won}  */ />
                               <label htmlFor="_checkbox-26">
                                 <div className="tick_mark"></div>
                               </label>

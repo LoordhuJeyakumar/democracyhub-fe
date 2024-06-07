@@ -8,7 +8,7 @@ import localIssuesService from "../services/localIssuesService";
 import ImageCarousel from "../components/ImageCarousel";
 import VoteComponent from "../components/VoteComponent";
 
-const IssueCard = ({ selectedIssue, setSelectedIssue }) => {
+const IssueCard = ({ eachIssue }) => {
   const upvoteBtn = useRef(null);
   const downvoteBtn = useRef(null);
 
@@ -19,24 +19,24 @@ const IssueCard = ({ selectedIssue, setSelectedIssue }) => {
     fetchIssue();
 
     if (downvoteBtn) {
-      if (selectedIssue.downvotedBy.includes(user.id)) {
+      if (eachIssue.downvotedBy.includes(user.id)) {
         downvoteBtn?.current?.focus();
       }
     }
 
     if (upvoteBtn) {
-      if (selectedIssue.upvotedBy.includes(user.id)) {
+      if (eachIssue.upvotedBy.includes(user.id)) {
         upvoteBtn?.current?.focus();
       }
     }
-  }, [selectedIssue]);
+  }, [eachIssue]);
 
   const dispatch = useDispatch();
   const [commentText, setCommentText] = useState("");
 
   const fetchIssue = async () => {
     try {
-      let res = await localIssuesService.getIssueById(selectedIssue._id);
+      let res = await localIssuesService.getIssueById(eachIssue._id);
       if (res.status == 200) {
         dispatch(
           localIssuesactionCreators.updateIssue(
@@ -60,7 +60,7 @@ const IssueCard = ({ selectedIssue, setSelectedIssue }) => {
   return (
     <div
       className="d-flex justify-content-center row selected-issue-card card m-2 p-2"
-      id={selectedIssue._id}
+      id={eachIssue._id}
     >
       <div className="d-flex flex-column  ">
         <div className="d-flex flex-row card-header align-items-center text-left comment-top p-2  border-bottom px-4">
@@ -73,62 +73,38 @@ const IssueCard = ({ selectedIssue, setSelectedIssue }) => {
               colors="primary:#1c140d,secondary:#f3ffbd,tertiary:#cbe86b"
               style={{ width: "70px", height: "70px" }}
             ></lord-icon>
-            <small>{selectedIssue.createdUserName}</small>
+            <small>{eachIssue.createdUserName}</small>
           </div>
 
           <div className="d-flex flex-column w-100">
             <div className="d-flex flex-row post-title">
-              <h5>{selectedIssue.title}</h5>
+              <h5>{eachIssue.title}</h5>
             </div>
             <div className="d-flex justify-content-start gap-2 align-content-center post-title">
-              <span className="bdge mr-1">{selectedIssue.category}</span>
+              <span className="bdge mr-1">{eachIssue.category}</span>
               <span className="mr-2 comments">
-                {selectedIssue.comments.length} comments&nbsp;
+                {eachIssue.comments.length} comments&nbsp;
               </span>
               <span className="mr-2 dot"></span>
-              <span>Posted {moment(selectedIssue.createdAt).fromNow()}</span>
+              <span>Posted {moment(eachIssue.createdAt).fromNow()}</span>
             </div>
           </div>
-          {/* <div className="upvote-downvote-box">
-            <button
-              className={`btn ${
-                selectedIssue.upvotedBy.includes(user.id)
-                  ? "btn-upvote-active"
-                  : "btn-upvote"
-              }`}
-              onClick={handleUpvote}
-              ref={upvoteBtn}
-            >
-              <i className="fas fa-thumbs-up"></i>
-              <span className="upvote-count">{selectedIssue.upvotes}</span>
-            </button>
-            <button
-              className={`btn ${
-                selectedIssue.downvotedBy.includes(user.id)
-                  ? "btn-downvote-active"
-                  : "btn-downvote"
-              }`}
-              onClick={handleDownvote}
-              ref={downvoteBtn}
-            >
-              <i className="fas fa-thumbs-down"></i>
-              <span className="downvote-count">{selectedIssue.downvotes}</span>
-            </button>
-          </div> */}
+
           <VoteComponent
-            issueId={selectedIssue._id}
-            upvotes={selectedIssue.upvotes}
-            downvotes={selectedIssue.downvotes}
-            upvotedBy={selectedIssue.upvotedBy}
-            downvotedBy={selectedIssue.downvotedBy}
-            setSelectedIssue={setSelectedIssue}
-            selectedIssue={selectedIssue}
+            key={eachIssue._id}
+            issueId={eachIssue._id}
+            upvotes={eachIssue.upvotes}
+            downvotes={eachIssue.downvotes}
+            upvotedBy={eachIssue.upvotedBy}
+            downvotedBy={eachIssue.downvotedBy}
+
+            eachIssue={eachIssue}
           />
         </div>
         <div className="card-body">
-          <p>{selectedIssue.description}</p>
-          {selectedIssue.photos.length != 0 ? (
-            <ImageCarousel images={selectedIssue.photos} />
+          <p>{eachIssue.description}</p>
+          {eachIssue.photos.length != 0 ? (
+            <ImageCarousel images={eachIssue.photos} />
           ) : (
             <div className="d-flex justify-content-center">
               <lord-icon
@@ -140,22 +116,7 @@ const IssueCard = ({ selectedIssue, setSelectedIssue }) => {
             </div>
           )}
 
-          {/* <div className="upvote-downvote-box">
-            <div className="radio_group">
-              <input type="radio" name="like" />
-              <label for="like">
-                <i className="fas fa-thumbs-up"></i>
-                <span className="upvote-count">0</span>
-              </label>
-            </div>
-            <div className="radio_group">
-              <input type="radio" name="like" />
-              <label for="like">
-                <i className="fas fa-thumbs-down"></i>{" "}
-                <span className="downvote-count">0</span>
-              </label>
-            </div>
-          </div> */}
+
         </div>
         <div className="comment-bottom  p-2 px-4">
           <div className="d-flex flex-row add-comment-section mt-4 mb-4">

@@ -656,15 +656,20 @@
   box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
 
+.user-dashboard .card{
+  background-image: linear-gradient(195deg,var(--creamyWhite),var(--mutedGreen))!important;
+  color: var(--richBrown) !important;
+}
+
 .admin-dashboard .card {
   background-color: cornsilk;
 }
 
-.admin-dashboard a{
+.admin-dashboard a, .user-dashboard a{
   font-size: .9rem;
   text-decoration: none;
 }
-.admin-dashboard a:hover{
+.admin-dashboard a:hover, .user-dashboard a:hover{
   color:#3ecd5e;
 }
 

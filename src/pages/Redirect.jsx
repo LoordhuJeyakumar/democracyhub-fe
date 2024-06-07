@@ -48,7 +48,7 @@ function Redirect() {
           </button>
         </p>
       </div>
-      <div className=" mb-5">
+      <div className=" mb-4">
         <lord-icon
           src="https://cdn.lordicon.com/spjdafms.json"
           trigger="loop"
@@ -56,7 +56,7 @@ function Redirect() {
           style={{ width: "250px", height: "250px" }}
         ></lord-icon>
       </div>
-      <div className="slider top-50 pt-5" style={{ marginTop: "8.4rem" }}>
+      <div className="slider top-50 pt-5" style={{ marginTop: "10.8rem" }}>
         <div className="line"></div>
         <div className="break dot1"></div>
         <div className="break dot2"></div>

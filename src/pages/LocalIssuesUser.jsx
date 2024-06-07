@@ -87,15 +87,12 @@ function LocalIssuesUser() {
           )}
         </div>
         <div className="col-lg-9">
-          {selectedIssue ? (
-            <>
-              <IssueCard
-                selectedIssue={selectedIssue}
-                setSelectedIssue={setSelectedIssue}
-              />
-            </>
+          {issues.loading ? (
+            issues.issues?.map((eachIssue, index) => (
+              <IssueCard eachIssue={eachIssue} key={index} />
+            ))
           ) : (
-            <div>Please select an issue to view details.</div>
+              <LoadingBox />
           )}
         </div>
       </div>
