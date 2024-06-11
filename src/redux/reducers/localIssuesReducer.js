@@ -6,9 +6,18 @@ const ACTION_TYPES = {
   DOWNVOTE_ISSUE: "DOWNVOTE_ISSUE",
   SET_LOADING: "SET_LOADING",
   SET_ERROR: "SET_ERROR",
+  SET_NEW_ISSUE: "SET_NEW_ISSUE",
+  REMOVE_NEW_ISSUE: "REMOVE_NEW_ISSUE",
 };
 
 const localIssuesactionCreators = {
+  setNewIssue: (issue) => ({
+    type: ACTION_TYPES.SET_NEW_ISSUE,
+    payload: issue,
+  }),
+  removeNewIssue: () => ({
+    type: ACTION_TYPES.REMOVE_NEW_ISSUE,
+  }),
   addIssue: (issue) => ({
     type: ACTION_TYPES.ADD_ISSUE,
     payload: issue,
@@ -50,13 +59,28 @@ export { ACTION_TYPES, localIssuesactionCreators };
 // Reducer remains the same
 const initialState = {
   issues: [],
-
+  newIssue: {},
   loading: false,
   error: null,
 };
 
 const localIssuesReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ACTION_TYPES.SET_NEW_ISSUE:
+      return {
+        ...state,
+        newIssue: { ...state.newIssue, ...action.payload },
+      };
+    case ACTION_TYPES.REMOVE_NEW_ISSUE:
+      return {
+        ...state,
+        newIssue: initialState.newIssue,
+      };
+    case ACTION_TYPES.ADD_ISSUE:
+      return {
+        ...state,
+        issues: action.payload,
+      };
     case ACTION_TYPES.ADD_ISSUE:
       return {
         ...state,

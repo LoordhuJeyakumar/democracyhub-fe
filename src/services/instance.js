@@ -14,12 +14,7 @@ const authInstance = axios.create({
   },
 });
 
-const formDataInstance = axios.create({
-  baseURL: baseURL,
-  headers: {
-    "Content-Type": "multipart/form-data",
-  },
-});
+
 
 const protectedInstance = axios.create({
   baseURL: baseURL,

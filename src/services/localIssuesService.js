@@ -28,7 +28,7 @@ const localIssuesService = {
       const response = await instance.protectedInstance.put(
         `${API_URL_ENDPOINT}upVote/${localIssueId}`
       );
-      
+
       return response;
     } catch (error) {
       console.error(error);
@@ -43,6 +43,30 @@ const localIssuesService = {
       return response;
     } catch (error) {
       console.error(error);
+    }
+  },
+  createIssue: async (newIssueFormData, setIsUploading, setUploadProgress) => {
+    try {
+      const response = await instance.protectedInstance.post(
+        `${API_URL_ENDPOINT}createIssue`,
+        newIssueFormData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          onUploadProgress: (progressEvent) => {
+            setIsUploading(true);
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+            setUploadProgress(percentCompleted);
+          },
+        }
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
     }
   },
 };

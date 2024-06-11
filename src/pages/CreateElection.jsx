@@ -508,7 +508,7 @@ function CreateElection() {
       zIndex: 10, // Increase this as needed
     }),
   };
-  console.log(electionState);
+  
   const handleSubmit = async (event) => {
 
     try {

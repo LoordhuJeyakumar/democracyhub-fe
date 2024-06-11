@@ -1,0 +1,7 @@
+// actions/localIssuesActionTypes.js
+export const ACTION_TYPES = {
+  ADD_ISSUE: "ADD_ISSUE",
+  UPDATE_ISSUE: "UPDATE_ISSUE",
+  UPVOTE_ISSUE: "UPVOTE_ISSUE",
+  DOWNVOTE_ISSUE: "DOWNVOTE_ISSUE",
+};

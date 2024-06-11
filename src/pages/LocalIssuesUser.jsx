@@ -35,74 +35,81 @@ function LocalIssuesUser() {
       <div>
         <h4 className="text-center mt-4 pb-0 mb-0">Loacal Issues</h4>
       </div>
-      <div
-        className="container-fluid my-1 py-3"
-      style={{ backgroundColor: "#f2e9e1" }}
-    >
-      <div className="row mt-3 pt-3">
-         
-          <div className="col-lg-3 overflow-scroll vh-100 card-list position-sticky  " style={{ top: 90 }}>
+      {issues?.issues?.length > 0 ? (
+        <div
+          className="container-fluid my-1 py-3"
+          style={{ backgroundColor: "#f2e9e1" }}
+        >
+          <div className="row mt-3 pt-3">
+            <div
+              className="col-lg-3 overflow-scroll vh-100 card-list position-sticky  "
+              style={{ top: 90 }}
+            >
+              {issues.loading ? (
+                issues.issues?.map((eachIssue, index) => (
+                  <div
+                    key={index}
+                    className="ag-courses_item"
+                    onClick={() => {
+                      setSelectedIssue(eachIssue);
+                      setIsActive(true);
+                    }}
+                  >
+                    <a
+                      href={`#${eachIssue._id}`}
+                      className={
+                        selectedIssue?._id == eachIssue?._id
+                          ? "ag-courses-item_link active"
+                          : "ag-courses-item_link"
+                      }
+                    >
+                      <div className="ag-courses-item_bg"></div>
+                      <div className="ag-courses-item_title">
+                        {eachIssue.title}
+                      </div>
 
-          {issues.loading ? (
-            issues.issues?.map((eachIssue, index) => (
-              <div
-                key={index}
-                className="ag-courses_item"
-                onClick={() => {
-                  setSelectedIssue(eachIssue);
-                  setIsActive(true);
-                }}
-              >
-                <a
-                  href={`#${eachIssue._id}`}
-                  className={
-                    selectedIssue?._id == eachIssue?._id
-                      ? "ag-courses-item_link active"
-                      : "ag-courses-item_link"
-                  }
-                >
-                  <div className="ag-courses-item_bg"></div>
-                  <div className="ag-courses-item_title">{eachIssue.title}</div>
+                      <small className=" ag-courses-item_date-box">
+                        Issue posted on: &nbsp;
+                        <span className="ag-courses-item_date">
+                          {moment(eachIssue.createdAt).format("DD-MM-YYYY")}
+                        </span>
+                      </small>
 
-                  <small className=" ag-courses-item_date-box">
-                    Issue posted on: &nbsp;
-                    <span className="ag-courses-item_date">
-                      {moment(eachIssue.createdAt).format("DD-MM-YYYY")}
-                    </span>
-                  </small>
-
-                  <div className="d-flex flex-column">
-                    <small className=" ag-courses-item_date-box">
-                      Category : &nbsp;
-                      <span className="ag-courses-item_date">
-                        {eachIssue.category}
-                      </span>
-                    </small>
-                    <small className=" ag-courses-item_date-box">
-                      Posted by: &nbsp;
-                      <span className="ag-courses-item_date">
-                        {eachIssue.createdUserName}
-                      </span>
-                    </small>
+                      <div className="d-flex flex-column">
+                        <small className=" ag-courses-item_date-box">
+                          Category : &nbsp;
+                          <span className="ag-courses-item_date">
+                            {eachIssue.category}
+                          </span>
+                        </small>
+                        <small className=" ag-courses-item_date-box">
+                          Posted by: &nbsp;
+                          <span className="ag-courses-item_date">
+                            {eachIssue.createdUserName}
+                          </span>
+                        </small>
+                      </div>
+                    </a>
                   </div>
-                </a>
-              </div>
-            ))
-          ) : (
-            <LoadingBox />
-          )}
+                ))
+              ) : (
+                <LoadingBox />
+              )}
+            </div>
+            <div className="col-lg-9">
+              {issues.loading ? (
+                issues.issues?.map((eachIssue, index) => (
+                  <IssueCard eachIssue={eachIssue} key={index} />
+                ))
+              ) : (
+                <LoadingBox />
+              )}
+            </div>
+          </div>
         </div>
-        <div className="col-lg-9">
-          {issues.loading ? (
-            issues.issues?.map((eachIssue, index) => (
-              <IssueCard eachIssue={eachIssue} key={index} />
-            ))
-          ) : (
-              <LoadingBox />
-          )}
-        </div>
-      </div>
-    </div>
+      ) : (
+        <LoadingBox width={30} />
+      )}
     </div>
   );
 }
