@@ -11,7 +11,7 @@ function HomePage() {
       <main>
         <section className="hero">
           <div className="image-container">
-            <img src={fist} alt="" />
+            <img src={fist} alt="" className="img-fluid"/>
             <div className="overlay">
               <div className="d-flex justify-content-evenly align-items-evenly  text-box row">
                 <div className="col-10 col-md-5 text-block-1 mb-5">
