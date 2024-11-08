@@ -10,7 +10,7 @@ function HomePage() {
       <Navbar />
       <main>
         <section className="hero">
-          <div className="image-container">
+          <div className="image-container w-auto">
             <img src={fist} alt="" className="img-fluid"/>
             <div className="overlay">
               <div className="d-flex justify-content-evenly align-items-evenly  text-box row">
